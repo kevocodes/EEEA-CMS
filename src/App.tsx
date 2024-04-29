@@ -1,13 +1,15 @@
 import { Toaster } from "@/components/ui/sonner";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
-import RequireAuth from "@/guards/private-router.guard";
-import NoRequireAuth from "@/guards/public-route.guard";
+import RequireAuth from "@/guards/privateRoute.guard";
+import NoRequireAuth from "@/guards/publicRoute.guard";
+import AppLayout from "@/layouts/AppLayout";
 import { Role } from "@/models/user.model";
+import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
 import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import { validateSession } from "@/services/auth.services";
 import { useAuth } from "@/stores/auth.store";
-import { createAppUserFromResponseUser } from "@/utils/create-user-from-response.util";
+import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
@@ -44,12 +46,16 @@ function App() {
           </Route>
 
           {/* PRIVATE ROUTES */}
-          <Route
-            element={
-              <RequireAuth allowedRoles={[Role.ADMIN, Role.CONTENT_MANAGER]} />
-            }
-          >
-            <Route path={PRIVATE_ROUTES.HOME} element={<h1>Home</h1>} />
+          <Route element={<AppLayout />}>
+            <Route
+              element={
+                <RequireAuth
+                  allowedRoles={[Role.ADMIN, Role.CONTENT_MANAGER]}
+                />
+              }
+            >
+              <Route path={PRIVATE_ROUTES.HOME} element={<Home />} />
+            </Route>
           </Route>
         </Routes>
       </Router>

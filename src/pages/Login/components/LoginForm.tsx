@@ -9,11 +9,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PRIVATE_ROUTES } from "@/constants/routes";
-import { ResponseError } from "@/models/response-error.model";
+import { ResponseError } from "@/models/responseError.model";
 import { loginSchema } from "@/schemas/login.schema";
 import { signIn } from "@/services/auth.services";
 import { useAuth } from "@/stores/auth.store";
-import { createAppUserFromResponseUser } from "@/utils/create-user-from-response.util";
+import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useForm } from "react-hook-form";

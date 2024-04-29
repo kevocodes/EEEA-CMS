@@ -1,4 +1,4 @@
-import { ResponseError } from "@/models/response-error.model";
+import { ResponseError } from "@/models/responseError.model";
 import { loginSchema } from "@/schemas/login.schema";
 import { z } from "zod";
 import { LoginDTO, UserResponseDTO } from "@/types/auth.types";
