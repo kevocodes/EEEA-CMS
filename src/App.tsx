@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
 import { Toaster } from "@/components/ui/sonner";
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
 import RequireAuth from "@/guards/private-router.guard";
-import { Role } from "@/models/user.model";
-import { useEffect } from "react";
-import { useAuth } from "@/stores/auth.store";
-import { validateSession } from "@/services/auth.services";
-import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import NoRequireAuth from "@/guards/public-route.guard";
-import { createAppUserFromResponseUser } from "@/utils/create-user-from-response.util";
+import { Role } from "@/models/user.model";
 import Login from "@/pages/Login/Login";
+import Unauthorized from "@/pages/Unauthorized/Unauthorized";
+import { validateSession } from "@/services/auth.services";
+import { useAuth } from "@/stores/auth.store";
+import { createAppUserFromResponseUser } from "@/utils/create-user-from-response.util";
+import { useEffect } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
   const token = useAuth((state) => state.token);

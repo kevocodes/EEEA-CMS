@@ -15,6 +15,7 @@ import { signIn } from "@/services/auth.services";
 import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/create-user-from-response.util";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -78,7 +79,14 @@ function LoginForm() {
         />
 
         <Button type="submit" className="w-full">
-          Submit
+          {form.formState.isSubmitting && (
+            <Icon
+              icon="bx:loader-alt"
+              className="animate-spin mr-2"
+              fontSize={16}
+            />
+          )}
+          Enviar
         </Button>
       </form>
     </Form>
