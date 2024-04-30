@@ -23,7 +23,7 @@ export const MobileSidebar = () => {
     <>
       <Button
         size="icon"
-        className="flex lg:hidden text-center"
+        className="flex md:hidden text-center"
         variant="outline"
         onClick={open}
       >
@@ -39,7 +39,7 @@ export const MobileSidebar = () => {
           className="pt-12 flex flex-col gap-4 overflow-auto w-[85%] sm:w-3/4"
         >
           <p className="text-2xl font-bold block">Menú</p>
-          <SidebarContent />
+          <SidebarContent isMobile/>
         </SheetContent>
       </Sheet>
     </>

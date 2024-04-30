@@ -15,7 +15,7 @@ export const SidebarCollapseButton = () => {
     <Button
       variant="ghost"
       onClick={handleToggle}
-      className={cn("h-auto w-auto px-3 py-3", isOpen && "p-3")}
+      className={cn("h-auto w-auto px-3 py-3")}
     >
       {isOpen ? (
         <Icon icon="lucide:panel-left-close" fontSize={24} />
