@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 import { ResponseError } from "@/models/responseError.model";
 import { loginSchema } from "@/schemas/login.schema";
-import { signIn } from "@/services/auth.services";
+import { signIn } from "@/services/auth.service";
 import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { zodResolver } from "@hookform/resolvers/zod";
