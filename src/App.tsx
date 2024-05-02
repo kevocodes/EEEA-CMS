@@ -12,6 +12,7 @@ import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import EventCreate from "./pages/EventCreate/EventCreate";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -57,8 +58,8 @@ function App() {
               <Route index element={<Events />} />
               <Route path={PRIVATE_ROUTES.EVENTS} element={<Events />} />
               <Route
-                path={`${PRIVATE_ROUTES.EVENTS}/:eventId`}
-                element={<>HOla mubnd</>}
+                path={`${PRIVATE_ROUTES.EVENTS}/create`}
+                element={<EventCreate />}
               />
             </Route>
           </Route>

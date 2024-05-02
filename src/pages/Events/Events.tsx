@@ -8,6 +8,7 @@ import { ResponseError } from "@/models/responseError.model";
 import { useEvents } from "@/stores/events.store";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Events() {
   const events = useEvents((state) => state.events);
@@ -31,16 +32,22 @@ function Events() {
     }
 
     fetchData();
+
+    return () => {
+      setEvents([]);
+    };
   }, [setEvents]);
 
   return (
     <PageContainer>
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Eventos</h2>
-        <Button className="w-full sm:w-fit">
-          <Plus size={16} className="mr-2" />
-          Crear evento
-        </Button>
+        <Link to="/events/create">
+          <Button className="w-full sm:w-fit">
+            <Plus size={16} className="mr-2" />
+            Crear evento
+          </Button>
+        </Link>
       </div>
       <EventsTable columns={eventsColumns} data={events} loading={loading} />
     </PageContainer>

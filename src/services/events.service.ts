@@ -1,5 +1,7 @@
 import { Event } from "@/models/events.model";
 import { ResponseError } from "@/models/responseError.model";
+import { createEventSchema } from "@/schemas/events.schema";
+import { z } from "zod";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -37,4 +39,31 @@ export const deleteEvent = async (
   }
 
   return "Evento eliminado con éxito";
+};
+
+export const createEvent = async (
+  event: z.infer<typeof createEventSchema>,
+  token: string
+): Promise<string> => {
+  const formData = new FormData();
+  formData.append("title", event.title);
+  formData.append("location", event.location);
+  formData.append("datetime", event.datetime.toISOString());
+  formData.append("thumbnail", event.thumbnail[0]);
+
+  console.log(formData);
+  
+  const response = await fetch(`${BASE_URL}/events`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new ResponseError("Ups...Algo salió mal", response.status);
+  }
+
+  return "Evento creado con éxito";
 };

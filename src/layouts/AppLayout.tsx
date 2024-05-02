@@ -10,9 +10,9 @@ function AppLayout() {
         <Sidebar />
         <Outlet />
       </section>
-      <footer className="h-14 py-2 px-5 border-t flex justify-center items-center">
+      {/* <footer className="h-14 py-2 px-5 border-t flex justify-center items-center">
         <h1>Footer</h1>
-      </footer>
+      </footer> */}
     </main>
   );
 }
