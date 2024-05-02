@@ -1,19 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Event } from "@/models/events.model";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import dayjs from "dayjs";
-import EventImagesViewer from "../components/EventImagesViewer";
 import EventThumbnailViewer from "../components/EventThumbnailViewer";
+import EventActions from "../components/EventActions/EventActions";
 
 export const eventsColumns: ColumnDef<Event>[] = [
   {
@@ -61,27 +51,7 @@ export const eventsColumns: ColumnDef<Event>[] = [
     cell: ({ row }) => {
       const event = row.original;
 
-      return (
-        <>
-          <EventImagesViewer
-            completed={event.completed}
-            images={event.images}
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open actions menu</span>
-                <MoreHorizontal className="h-6 w-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-              <DropdownMenuItem>Editar</DropdownMenuItem>
-              <DropdownMenuItem>Eliminar</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </>
-      );
+      return <EventActions event={event} />;
     },
   },
 ];

@@ -2,11 +2,15 @@ import { DEFAULT_REDIRECT } from "@/constants/routes";
 import { useAuth } from "@/stores/auth.store";
 import { Navigate, Outlet } from "react-router-dom";
 
-function PublicGuard() {
+interface PublicGuardProps {
+  redirect?: string;
+}
+
+function PublicGuard({ redirect = DEFAULT_REDIRECT }: PublicGuardProps) {
   const user = useAuth((state) => state.user);
-  
+
   if (user) {
-    return <Navigate to={DEFAULT_REDIRECT} replace />;
+    return <Navigate to={redirect} replace />;
   }
 
   return <Outlet />;

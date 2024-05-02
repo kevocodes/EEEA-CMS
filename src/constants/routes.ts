@@ -5,6 +5,7 @@ export const PUBLIC_ROUTES = {
 
 export const PRIVATE_ROUTES = {
   HOME: "/",
+  EVENTS: "/events",
 };
 
 export const DEFAULT_REDIRECT = PRIVATE_ROUTES.HOME;

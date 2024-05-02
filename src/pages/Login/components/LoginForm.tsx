@@ -15,7 +15,7 @@ import { signIn } from "@/services/auth.service";
 import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -80,11 +80,7 @@ function LoginForm() {
 
         <Button type="submit" className="w-full">
           {form.formState.isSubmitting && (
-            <Icon
-              icon="bx:loader-alt"
-              className="animate-spin mr-2"
-              fontSize={16}
-            />
+            <LoaderCircle size={16} className="animate-spin mr-2" />
           )}
           Enviar
         </Button>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/stores/sidebar.store";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { SidebarClose, SidebarOpen } from "lucide-react";
 
 export const SidebarCollapseButton = () => {
   const isOpen = useSidebar((state) => state.isOpen);
@@ -18,9 +18,9 @@ export const SidebarCollapseButton = () => {
       className={cn("h-auto w-auto px-3 py-3")}
     >
       {isOpen ? (
-        <Icon icon="lucide:panel-left-close" fontSize={24} />
+        <SidebarClose size={24} />
       ) : (
-        <Icon icon="lucide:panel-left-open" fontSize={24} />
+        <SidebarOpen size={24} />
       )}
     </Button>
   );

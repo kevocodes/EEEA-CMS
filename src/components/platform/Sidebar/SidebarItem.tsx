@@ -2,11 +2,13 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/stores/auth.store";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { PRIVATE_ROUTES } from "@/constants/routes";
 
 interface SidebarItemProps {
   children?: React.ReactNode;
   label: string;
   to: string;
+  isIndexRoute?: boolean;
   isSidebarOpen?: boolean;
 }
 
@@ -20,9 +22,11 @@ export const SidebarItem = ({
   children,
   to,
   isSidebarOpen,
+  isIndexRoute,
 }: SidebarItemProps) => {
   const pathname = useLocation().pathname;
-  const isActive = pathname === to;
+  const isActive =
+    pathname.includes(to) || (isIndexRoute && pathname === PRIVATE_ROUTES.HOME);
 
   return (
     <Link

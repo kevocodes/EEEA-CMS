@@ -1,7 +1,7 @@
 import { SidebarItem, SidebarItemLogout } from "./SidebarItem";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 import { useSidebar } from "@/stores/sidebar.store";
+import { CalendarClock, LogOut } from "lucide-react";
 
 interface SidebarContentProps {
   isMobile?: boolean;
@@ -15,18 +15,15 @@ export const SidebarContent = ({ isMobile }: SidebarContentProps) => {
     <>
       <SidebarItem
         label="Eventos"
-        to={PRIVATE_ROUTES.HOME}
+        to={PRIVATE_ROUTES.EVENTS}
         isSidebarOpen={isSidebarOpen}
+        isIndexRoute
       >
-        <Icon
-          width={24}
-          height={24}
-          icon="material-symbols:laptop-chromebook-outline"
-        />
+        <CalendarClock size={24} />
       </SidebarItem>
 
       <SidebarItemLogout label="Cerrar sesión" isSidebarOpen={isSidebarOpen}>
-        <Icon width={24} height={24} icon="material-symbols:logout" />
+        <LogOut size={24} />
       </SidebarItemLogout>
     </>
   );

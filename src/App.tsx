@@ -4,7 +4,7 @@ import RequireAuth from "@/guards/privateRoute.guard";
 import NoRequireAuth from "@/guards/publicRoute.guard";
 import AppLayout from "@/layouts/AppLayout";
 import { Role } from "@/models/user.model";
-import Home from "@/pages/Events/Events";
+import Events from "@/pages/Events/Events";
 import Login from "@/pages/Login/Login";
 import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import { validateSession } from "@/services/auth.service";
@@ -54,7 +54,12 @@ function App() {
                 />
               }
             >
-              <Route path={PRIVATE_ROUTES.HOME} element={<Home />} />
+              <Route index element={<Events />} />
+              <Route path={PRIVATE_ROUTES.EVENTS} element={<Events />} />
+              <Route
+                path={`${PRIVATE_ROUTES.EVENTS}/:eventId`}
+                element={<>HOla mubnd</>}
+              />
             </Route>
           </Route>
         </Routes>
