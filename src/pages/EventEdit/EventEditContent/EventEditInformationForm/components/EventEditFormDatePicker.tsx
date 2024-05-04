@@ -21,7 +21,7 @@ interface EventFormDatePickerProps {
 
 function EventEditFormDatePicker({ field }: EventFormDatePickerProps) {
   return (
-      <FormItem className="flex flex-col ">
+      <FormItem className="flex flex-col flex-1">
         <FormLabel className="text-left py-[5px]">Fecha y hora</FormLabel>
         <Dialog>
           <FormControl>

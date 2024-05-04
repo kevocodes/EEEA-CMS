@@ -39,7 +39,7 @@ function EventEditContent() {
   return (
     <Tabs
       defaultValue="information"
-      className="w-full flex flex-col items-center"
+      className="w-full"
     >
       <TabsList>
         <TabsTrigger value="information">Información</TabsTrigger>
