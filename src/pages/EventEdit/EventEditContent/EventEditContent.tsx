@@ -64,7 +64,7 @@ function EventEditContent() {
     <Tabs defaultValue="information" className="w-full">
       <TabsList>
         <TabsTrigger value="information">Información</TabsTrigger>
-        <TabsTrigger value="images">Imágenes</TabsTrigger>
+        {event?.completed && <TabsTrigger value="images">Imágenes</TabsTrigger>}
       </TabsList>
       <TabsContent value="information" className="flex justify-center w-full">
         {event && thumbnail && (
@@ -75,9 +75,11 @@ function EventEditContent() {
           />
         )}
       </TabsContent>
-      <TabsContent value="images" className="flex justify-center w-full">
-        Images Page
-      </TabsContent>
+      {event?.completed && (
+        <TabsContent value="images" className="flex justify-center w-full">
+          Images Page
+        </TabsContent>
+      )}
     </Tabs>
   );
 }

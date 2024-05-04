@@ -148,8 +148,12 @@ function EventEditInformationForm({
                   </FormControl>
 
                   <SelectContent>
-                    <SelectItem value="pending">Pendiente</SelectItem>
-                    <SelectItem value="completed">Completado</SelectItem>
+                    <SelectItem value="pending" className="cursor-pointer">
+                      Pendiente
+                    </SelectItem>
+                    <SelectItem value="completed" className="cursor-pointer">
+                      Completado
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
