@@ -31,11 +31,19 @@ import { useAuth } from "@/stores/auth.store";
 interface EventEditInformationFormProps {
   event: EventDetail;
   thumbnail: File;
+  updateEventFromUI: (
+    title: string,
+    location: string,
+    datetime: Date,
+    completed: boolean,
+    thumbnail: File
+  ) => void;
 }
 
 function EventEditInformationForm({
   event,
   thumbnail,
+  updateEventFromUI,
 }: EventEditInformationFormProps) {
   const token = useAuth((state) => state.token);
 
@@ -44,18 +52,28 @@ function EventEditInformationForm({
     defaultValues: {
       title: event.title,
       location: event.location,
-      datetime: new Date(event.datetime),
-      status: event.completed ? "completed" : "pending",
+      datetime: new Date(event.datetime), // Convert string to Date
+      status: event.completed ? "completed" : "pending", // Convert boolean to string
       thumbnail: [thumbnail],
     },
   });
 
   const onSubmit = async (values: z.infer<typeof editEventSchema>) => {
     try {
+      // Update event in DB
       await Promise.all([
         updateEvent(event.id, values, token!),
         updateEventStatus(event.id, values.status === "completed", token!),
       ]);
+
+      // Update event state in UI
+      updateEventFromUI(
+        values.title,
+        values.location,
+        values.datetime,
+        values.status === "completed",
+        values.thumbnail[0]
+      );
 
       toast.success("Evento actualizado correctamente");
     } catch (error) {
