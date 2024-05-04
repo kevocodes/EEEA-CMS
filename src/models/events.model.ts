@@ -16,3 +16,14 @@ export interface EventImage {
   id: string;
   url: string;
 }
+
+export interface EventDetail extends Event {
+  creator: Creator;
+}
+
+export interface Creator {
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+}

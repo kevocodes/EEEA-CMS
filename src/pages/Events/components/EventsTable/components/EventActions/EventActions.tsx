@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -13,6 +12,7 @@ import EventActionDeleteButton from "./components/EventActionDeleteButton";
 import { Dialog } from "@/components/ui/dialog";
 import EventActionDeleteDialog from "./components/EventActionDeleteDialog";
 import { useState } from "react";
+import EventActionEditButton from "./components/EventActionEditButton";
 
 interface EventActionsProps {
   event: Event;
@@ -33,7 +33,7 @@ function EventActions({ event }: EventActionsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-          <DropdownMenuItem>Editar</DropdownMenuItem>
+          <EventActionEditButton event={event} />
           <EventActionDeleteButton />
         </DropdownMenuContent>
       </DropdownMenu>

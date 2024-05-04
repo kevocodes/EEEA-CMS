@@ -29,7 +29,7 @@ export const eventsColumns: ColumnDef<Event>[] = [
     cell: ({ row }) => {
       const datetime = row.getValue("datetime") as string;
 
-      return <div>{dayjs(datetime).format("DD/MM/YYYY - hh:mm a")}</div>;
+      return <div>{dayjs(datetime).format("DD/MM/YYYY - HH:mm")}</div>;
     },
   },
   {

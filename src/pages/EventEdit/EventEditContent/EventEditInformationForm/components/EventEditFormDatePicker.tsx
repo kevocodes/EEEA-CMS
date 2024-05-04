@@ -9,21 +9,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { createEventSchema } from "@/schemas/events.schema";
+import { editEventSchema } from "@/schemas/events.schema";
 import dayjs from "dayjs";
 import { CalendarIcon } from "lucide-react";
 import { ControllerRenderProps } from "react-hook-form";
 import { z } from "zod";
 
 interface EventFormDatePickerProps {
-  field: ControllerRenderProps<z.infer<typeof createEventSchema>, "datetime">;
+  field: ControllerRenderProps<z.infer<typeof editEventSchema>, "datetime">;
 }
 
-function EventCreateFormDatePicker({ field }: EventFormDatePickerProps) {
+function EventEditFormDatePicker({ field }: EventFormDatePickerProps) {
   return (
-    <>
-      <FormItem className="flex flex-col">
-        <FormLabel className="text-left">Fecha y hora</FormLabel>
+      <FormItem className="flex flex-col ">
+        <FormLabel className="text-left py-[5px]">Fecha y hora</FormLabel>
         <Dialog>
           <FormControl>
             <DialogTrigger asChild>
@@ -58,8 +57,7 @@ function EventCreateFormDatePicker({ field }: EventFormDatePickerProps) {
           </DialogContent>
         </Dialog>
       </FormItem>
-    </>
   );
 }
 
-export default EventCreateFormDatePicker;
+export default EventEditFormDatePicker;

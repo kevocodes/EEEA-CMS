@@ -9,36 +9,55 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ResponseError } from "@/models/responseError.model";
-import { createEventSchema } from "@/schemas/events.schema";
+import { editEventSchema } from "@/schemas/events.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import EventCreateFormDatePicker from "./components/EventCreateFormDatePicker";
-import EventImageDropzone from "./components/EventCreateImageDropzone";
+import EventEditFormDatePicker from "./components/EventEditFormDatePicker";
+import EventImageDropzone from "./components/EventEditImageDropzone";
 import { LoaderCircle } from "lucide-react";
-import { createEvent } from "@/services/events.service";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { EventDetail } from "@/models/events.model";
+import { updateEvent, updateEventStatus } from "@/services/events.service";
 import { useAuth } from "@/stores/auth.store";
-import { useNavigate } from "react-router-dom";
-import { PRIVATE_ROUTES } from "@/constants/routes";
 
-function EventCreateForm() {
-  const navigate = useNavigate();
+interface EventEditInformationFormProps {
+  event: EventDetail;
+  thumbnail: File;
+}
+
+function EventEditInformationForm({
+  event,
+  thumbnail,
+}: EventEditInformationFormProps) {
   const token = useAuth((state) => state.token);
 
-  const form = useForm<z.infer<typeof createEventSchema>>({
-    resolver: zodResolver(createEventSchema),
+  const form = useForm<z.infer<typeof editEventSchema>>({
+    resolver: zodResolver(editEventSchema),
     defaultValues: {
-      title: "",
-      location: "",
+      title: event.title,
+      location: event.location,
+      datetime: new Date(event.datetime),
+      status: event.completed ? "completed" : "pending",
+      thumbnail: [thumbnail],
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof createEventSchema>) => {
+  const onSubmit = async (values: z.infer<typeof editEventSchema>) => {
     try {
-      const respose = await createEvent(values, token!);
-      toast.success(respose);
-      navigate(PRIVATE_ROUTES.EVENTS);
+      await Promise.all([
+        updateEvent(event.id, values, token!),
+        updateEventStatus(event.id, values.status === "completed", token!),
+      ]);
+
+      toast.success("Evento actualizado correctamente");
     } catch (error) {
       if (error instanceof ResponseError) {
         toast.error(error.message);
@@ -88,7 +107,30 @@ function EventCreateForm() {
         <FormField
           control={form.control}
           name="datetime"
-          render={({ field }) => <EventCreateFormDatePicker field={field} />}
+          render={({ field }) => <EventEditFormDatePicker field={field} />}
+        />
+
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Estado</FormLabel>..
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Estado" />
+                  </SelectTrigger>
+                </FormControl>
+
+                <SelectContent>
+                  <SelectItem value="pending">Pendiente</SelectItem>
+                  <SelectItem value="completed">Completado</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         <div className="flex gap-2">
@@ -96,7 +138,7 @@ function EventCreateForm() {
             {form.formState.isSubmitting && (
               <LoaderCircle size={16} className="animate-spin mr-2" />
             )}
-            Crear evento
+            Guardar cambios
           </Button>
         </div>
       </form>
@@ -104,4 +146,4 @@ function EventCreateForm() {
   );
 }
 
-export default EventCreateForm;
+export default EventEditInformationForm;

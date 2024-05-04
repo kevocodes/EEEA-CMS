@@ -12,7 +12,8 @@ import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import EventCreate from "./pages/EventCreate/EventCreate";
+import EventCreate from "@/pages/EventCreate/EventCreate";
+import EventEdit from "@/pages/EventEdit/EventEdit";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -60,6 +61,10 @@ function App() {
               <Route
                 path={`${PRIVATE_ROUTES.EVENTS}/create`}
                 element={<EventCreate />}
+              />
+              <Route
+                path={`${PRIVATE_ROUTES.EVENTS}/edit/:eventId`}
+                element={<EventEdit />}
               />
             </Route>
           </Route>

@@ -42,7 +42,7 @@ function Events() {
     <PageContainer>
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Eventos</h2>
-        <Link to="/events/create">
+        <Link to="/events/create" className="w-full sm:w-fit">
           <Button className="w-full sm:w-fit">
             <Plus size={16} className="mr-2" />
             Crear evento

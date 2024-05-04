@@ -1,13 +1,13 @@
 import * as z from "zod";
 import DropzoneContainer from "react-dropzone";
 import { toast } from "sonner";
-import EventImageDropzoneContent from "./EventImageDropzoneContent";
+import EventImageDropzoneContent from "./EventEditImageDropzoneContent";
 import { useForm } from "react-hook-form";
-import { createEventSchema } from "@/schemas/events.schema";
+import { editEventSchema } from "@/schemas/events.schema";
 import { cn } from "@/lib/utils";
 
 interface DropzoneProps {
-  form: ReturnType<typeof useForm<z.infer<typeof createEventSchema>>>;
+  form: ReturnType<typeof useForm<z.infer<typeof editEventSchema>>>;
 }
 
 export default function EventImageDropzone({ form }: DropzoneProps) {
@@ -36,7 +36,7 @@ export default function EventImageDropzone({ form }: DropzoneProps) {
         form.trigger("thumbnail");
       }}
     >
-      {({ getRootProps, getInputProps, isDragActive, acceptedFiles }) => (
+      {({ getRootProps, getInputProps, isDragActive }) => (
         <div className="flex flex-col gap-2">
           {/* Error message */}
           {form.formState.errors.thumbnail ? (
@@ -52,7 +52,9 @@ export default function EventImageDropzone({ form }: DropzoneProps) {
             className={cn(
               "w-full rounded-lg bg-muted border-2 border-dashed border-gray-300 p-8 text-center focus:outline-none focus:ring-1 focus:ring-ring",
               isDragActive && "border-primary bg-primary/20",
-              acceptedFiles.length > 0 && "border-primary bg-primary/20"
+              // acceptedFiles.length > 0 && "border-primary bg-primary/20"\
+              form.watch("thumbnail").length > 0 &&
+                "border-primary bg-primary/20"
             )}
           >
             <input {...getInputProps()} />
@@ -64,11 +66,11 @@ export default function EventImageDropzone({ form }: DropzoneProps) {
               // Else show the selected image preview and name
               <EventImageDropzoneContent
                 description={
-                  acceptedFiles.length === 0
+                  form.watch("thumbnail").length === 0
                     ? "Arrastra la imagen o haz clic aquí"
-                    : acceptedFiles[0].name
+                    : form.watch("thumbnail")[0].name
                 }
-                image={acceptedFiles[0]}
+                image={form.watch("thumbnail")[0]}
               />
             )}
           </div>
