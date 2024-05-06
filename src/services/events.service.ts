@@ -57,8 +57,6 @@ export const createEvent = async (
   formData.append("datetime", event.datetime.toISOString());
   formData.append("thumbnail", event.thumbnail[0]);
 
-  console.log(formData);
-
   const response = await fetch(`${BASE_URL}/events`, {
     method: "POST",
     headers: {
@@ -143,3 +141,22 @@ export const deleteEvent = async (
 
   return "Evento eliminado con éxito";
 };
+
+
+export const deleteEventImage = async (
+  imageId: string,
+  token: string
+): Promise<string> => {
+  const response = await fetch(`${BASE_URL}/events/images/${imageId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new ResponseError("Ups...Algo salió mal", response.status);
+  }
+
+  return "Imagen eliminada con éxito";
+}

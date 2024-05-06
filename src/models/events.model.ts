@@ -15,6 +15,8 @@ export interface Event {
 export interface EventImage {
   id: string;
   url: string;
+  width: number;
+  height: number;
 }
 
 export interface EventDetail extends Event {

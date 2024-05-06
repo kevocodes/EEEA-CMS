@@ -20,7 +20,7 @@ function ImagesViewer({ completed, images }: ImagesViewerProps) {
     <>
       <Button
         variant="ghost"
-        disabled={!completed}
+        disabled={!completed || images.length === 0}
         className="h-8 w-8 p-0"
         onClick={handleOpen}
       >
@@ -28,9 +28,11 @@ function ImagesViewer({ completed, images }: ImagesViewerProps) {
       </Button>
 
       <Lightbox
-        styles={{ container: { background: "rgba(0, 0, 0, 0.7)" }}}
+        styles={{ container: { background: "rgba(0, 0, 0, 0.7)" } }}
         plugins={[Counter]}
-        counter={{ container: { style: { fontWeight: "bold", bottom: 0, top: "unset" } } }}
+        counter={{
+          container: { style: { fontWeight: "bold", bottom: 0, top: "unset" } },
+        }}
         open={open}
         close={handleClose}
         slides={images.map((image) => ({

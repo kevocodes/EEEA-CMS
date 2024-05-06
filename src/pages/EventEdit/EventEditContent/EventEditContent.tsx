@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "@/stores/auth.store";
 import { EventDetail } from "@/models/events.model";
 import { urlToFile } from "@/utils/createImageFileFromUrl";
+import EventEditImages from "./EventEditImages/EventEditImages";
 
 type EventEditParams = {
   eventId: string;
@@ -16,6 +17,7 @@ type EventEditParams = {
 function EventEditContent() {
   const [event, setEvent] = useState<EventDetail | null>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
+
   const { eventId } = useParams<EventEditParams>();
   const token = useAuth((state) => state.token);
 
@@ -43,13 +45,25 @@ function EventEditContent() {
     setThumbnail(thumbnail);
   };
 
+  const removeImageFromEventUI = (imageId: string) => {
+    // Update event state
+    setEvent((prev) => {
+      if (!prev) return null;
+
+      return {
+        ...prev,
+        // Remove image from images array by filtering it out
+        images: prev.images.filter((image) => image.id !== imageId),
+      };
+    });
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await getEventById(eventId!, token!);
         setThumbnail(await urlToFile(response.thumbnail, "thumbnail.webp"));
         setEvent(response);
-        console.log(response);
       } catch (error) {
         if (error instanceof ResponseError) {
           toast.error(error.message);
@@ -77,7 +91,10 @@ function EventEditContent() {
       </TabsContent>
       {event?.completed && (
         <TabsContent value="images" className="flex justify-center w-full">
-          Images Page
+          <EventEditImages
+            images={event.images}
+            removeImageFromUI={removeImageFromEventUI}
+          />
         </TabsContent>
       )}
     </Tabs>
