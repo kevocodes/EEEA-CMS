@@ -142,7 +142,6 @@ export const deleteEvent = async (
   return "Evento eliminado con éxito";
 };
 
-
 export const deleteEventImage = async (
   imageId: string,
   token: string
@@ -159,4 +158,22 @@ export const deleteEventImage = async (
   }
 
   return "Imagen eliminada con éxito";
-}
+};
+
+export const deleteAllEventImages = async (
+  eventId: string,
+  token: string
+): Promise<string> => {
+  const response = await fetch(`${BASE_URL}/events/${eventId}/images/all`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new ResponseError("Ups...Algo salió mal", response.status);
+  }
+
+  return "Todas las imágenes eliminadas con éxito";
+};

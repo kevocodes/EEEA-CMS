@@ -58,6 +58,18 @@ function EventEditContent() {
     });
   };
 
+  const removeAllImagesFromEventUI = () => {
+    // Update event state
+    setEvent((prev) => {
+      if (!prev) return null;
+
+      return {
+        ...prev,
+        images: [],
+      };
+    });
+  }
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -92,8 +104,10 @@ function EventEditContent() {
       {event?.completed && (
         <TabsContent value="images" className="flex justify-center w-full">
           <EventEditImages
+            event={event}
             images={event.images}
             removeImageFromUI={removeImageFromEventUI}
+            removeAllImagesFromEventUI={removeAllImagesFromEventUI}
           />
         </TabsContent>
       )}
