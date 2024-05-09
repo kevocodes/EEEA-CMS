@@ -19,8 +19,8 @@ import { LoaderCircle, Trash2 } from "lucide-react";
 function CustomImage({
   imageProps: { src, style },
   item: { key },
-  removeImageFromUI,
-}: ThumbnailImageProps & { removeImageFromUI: (eventId: string) => void }) {
+  refetch,
+}: ThumbnailImageProps & { refetch: () => void }) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -30,7 +30,7 @@ function CustomImage({
     try {
       setLoading(true);
       const response = await deleteEventImage(String(key), token!);
-      removeImageFromUI(String(key));
+      refetch();
       toast.success(response);
       setOpen(false);
     } catch (error) {

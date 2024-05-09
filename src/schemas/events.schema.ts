@@ -1,3 +1,4 @@
+import { sizeInMB } from "@/utils/file-size-converter";
 import * as z from "zod";
 
 const ACCEPTED_IMAGE_TYPES = [
@@ -7,12 +8,9 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/jpg",
 ];
 
-const MAX_IMAGE_MB_SIZE = 1.5;
+export const MAX_IMAGE_MB_SIZE = 1.5;
 
-const sizeInMB = (sizeInBytes: number, decimalsNum = 2) => {
-  const result = sizeInBytes / (1024 * 1024);
-  return +result.toFixed(decimalsNum);
-};
+
 
 export const createEventSchema = z.object({
   title: z.string().min(1, "Título requerido"),
@@ -65,4 +63,22 @@ export const editEventSchema = z.object({
         ACCEPTED_IMAGE_TYPES.includes(file.type)
       );
     }, "Tipo de archivo de imágen no soportado"),
+});
+
+export const addEventImageSchema = z.object({
+  images: z
+    .custom<File[]>()
+    .refine((files) => {
+      return Array.from(files ?? []).length > 0;
+    }, "Imagenes requeridas")
+    .refine((files) => {
+      return Array.from(files ?? []).every(
+        (file) => sizeInMB(file.size) <= MAX_IMAGE_MB_SIZE
+      );
+    }, `El tamaño máximo de las imágenes es de ${MAX_IMAGE_MB_SIZE} MB`)
+    .refine((files) => {
+      return Array.from(files ?? []).every((file) =>
+        ACCEPTED_IMAGE_TYPES.includes(file.type)
+      );
+    }, "Tipo de archivo de imágenes no soportado"),
 });

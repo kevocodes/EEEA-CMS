@@ -2,21 +2,18 @@ import { Event, EventImage } from "@/models/events.model";
 import { convertToPhotos } from "./utils/convert-to-slides";
 import { Gallery } from "react-grid-gallery";
 import CustomImage from "./components/CustomImage";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import DeleteAllImagesButton from "./components/DeleteAllImagesButton/DeleteAllImagesButton";
+import AddEventImage from "./components/AddEventImage/AddEventImage";
 
 interface EventEditImagesProps {
   event: Event;
   images: EventImage[];
-  removeImageFromUI: (imageId: string) => void;
-  removeAllImagesFromEventUI: () => void;
+  refetch: () => void;
 }
 function EventEditImages({
   event,
   images,
-  removeImageFromUI,
-  removeAllImagesFromEventUI,
+  refetch,
 }: EventEditImagesProps) {
   return (
     <div className="w-full flex flex-col gap-4 bg-background p-8 rounded-lg">
@@ -27,17 +24,14 @@ function EventEditImages({
           </p>
         </div>
 
-        <div className="flex gap-2 flex-col sm:flex-row justify-center">
+        <div className="flex gap-2 flex-col-reverse sm:flex-row justify-center">
           {images.length > 0 && (
             <DeleteAllImagesButton
               event={event}
-              removeAllImagesFromEventUI={removeAllImagesFromEventUI}
+              refetch={refetch}
             />
           )}
-          <Button className="w-full sm:w-fit">
-            <Plus size={16} className="mr-2" />
-            Agregar imágen
-          </Button>
+          <AddEventImage event={event} refetch={refetch}/>
         </div>
       </div>
       <Gallery
@@ -45,7 +39,7 @@ function EventEditImages({
         enableImageSelection={false}
         thumbnailImageComponent={(props) => {
           return (
-            <CustomImage {...props} removeImageFromUI={removeImageFromUI} />
+            <CustomImage {...props} refetch={refetch} />
           );
         }}
       />

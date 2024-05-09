@@ -15,60 +15,17 @@ type EventEditParams = {
 };
 
 function EventEditContent() {
+  const [refetch, setRefetch] = useState(false);
   const [event, setEvent] = useState<EventDetail | null>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
 
   const { eventId } = useParams<EventEditParams>();
   const token = useAuth((state) => state.token);
 
-  const updateEventFromUI = (
-    title: string,
-    location: string,
-    datetime: Date,
-    completed: boolean,
-    thumbnail: File
-  ) => {
-    // Update event state
-    setEvent((prev) => {
-      if (!prev) return null;
-
-      return {
-        ...prev,
-        title,
-        location,
-        datetime: datetime.toISOString(),
-        completed,
-      };
-    });
-
-    // Update thumbnail state
-    setThumbnail(thumbnail);
+  // Function to refetch data and update UI
+  const refetchData = () => {
+    setRefetch((prev) => !prev);
   };
-
-  const removeImageFromEventUI = (imageId: string) => {
-    // Update event state
-    setEvent((prev) => {
-      if (!prev) return null;
-
-      return {
-        ...prev,
-        // Remove image from images array by filtering it out
-        images: prev.images.filter((image) => image.id !== imageId),
-      };
-    });
-  };
-
-  const removeAllImagesFromEventUI = () => {
-    // Update event state
-    setEvent((prev) => {
-      if (!prev) return null;
-
-      return {
-        ...prev,
-        images: [],
-      };
-    });
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -84,7 +41,7 @@ function EventEditContent() {
     }
 
     fetchData();
-  }, [eventId, token]);
+  }, [eventId, token, refetch]);
 
   return (
     <Tabs defaultValue="information" className="w-full">
@@ -97,8 +54,8 @@ function EventEditContent() {
           <EventEditInformationForm
             event={event}
             thumbnail={thumbnail}
-            updateEventFromUI={updateEventFromUI}
-          />
+            refetch={refetchData}
+            />
         )}
       </TabsContent>
       {event?.completed && (
@@ -106,8 +63,7 @@ function EventEditContent() {
           <EventEditImages
             event={event}
             images={event.images}
-            removeImageFromUI={removeImageFromEventUI}
-            removeAllImagesFromEventUI={removeAllImagesFromEventUI}
+            refetch={refetchData}
           />
         </TabsContent>
       )}

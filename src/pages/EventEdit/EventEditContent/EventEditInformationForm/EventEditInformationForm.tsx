@@ -31,19 +31,13 @@ import { useAuth } from "@/stores/auth.store";
 interface EventEditInformationFormProps {
   event: EventDetail;
   thumbnail: File;
-  updateEventFromUI: (
-    title: string,
-    location: string,
-    datetime: Date,
-    completed: boolean,
-    thumbnail: File
-  ) => void;
+  refetch: () => void;
 }
 
 function EventEditInformationForm({
   event,
   thumbnail,
-  updateEventFromUI,
+  refetch,
 }: EventEditInformationFormProps) {
   const token = useAuth((state) => state.token);
 
@@ -67,13 +61,7 @@ function EventEditInformationForm({
       ]);
 
       // Update event state in UI
-      updateEventFromUI(
-        values.title,
-        values.location,
-        values.datetime,
-        values.status === "completed",
-        values.thumbnail[0]
-      );
+      refetch();
 
       toast.success("Evento actualizado correctamente");
     } catch (error) {

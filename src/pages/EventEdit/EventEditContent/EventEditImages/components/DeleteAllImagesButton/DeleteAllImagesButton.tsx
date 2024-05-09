@@ -18,13 +18,10 @@ import { toast } from "sonner";
 
 interface DeleteAllImagesButtonProps {
   event: Event;
-  removeAllImagesFromEventUI: () => void;
+  refetch: () => void;
 }
 
-function DeleteAllImagesButton({
-  event,
-  removeAllImagesFromEventUI,
-}: DeleteAllImagesButtonProps) {
+function DeleteAllImagesButton({ event, refetch }: DeleteAllImagesButtonProps) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -35,7 +32,7 @@ function DeleteAllImagesButton({
       setLoading(true);
       const response = await deleteAllEventImages(event.id, token!);
       toast.success(response);
-      removeAllImagesFromEventUI();
+      refetch();
       setOpen(false);
     } catch (error) {
       if (error instanceof ResponseError) {

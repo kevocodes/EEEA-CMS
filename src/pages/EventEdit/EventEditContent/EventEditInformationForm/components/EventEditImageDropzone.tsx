@@ -20,8 +20,8 @@ export default function EventImageDropzone({ form }: DropzoneProps) {
         "image/jpeg": [],
         "image/jpg": [],
       }}
-      onDrop={(acceptedFiles, rejectedFileas) => {
-        if (rejectedFileas.length > 0) {
+      onDrop={(acceptedFiles, rejectedFiles) => {
+        if (rejectedFiles.length > 0) {
           toast.error(
             "Solo se permiten imágenes en formato jpg, jpeg, png o webp"
           );

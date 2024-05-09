@@ -177,3 +177,29 @@ export const deleteAllEventImages = async (
 
   return "Todas las imágenes eliminadas con éxito";
 };
+
+
+export const addImagesToEvent = async (
+  eventId: string,
+  images: File[],
+  token: string
+): Promise<string> => {
+  const formData = new FormData();
+  images.forEach((image) => {
+    formData.append("images", image);
+  });
+
+  const response = await fetch(`${BASE_URL}/events/${eventId}/images`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new ResponseError("Ups...Algo salió mal", response.status);
+  }
+
+  return "Imágenes agregadas con éxito";
+}
