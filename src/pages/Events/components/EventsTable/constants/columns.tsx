@@ -4,6 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import EventThumbnailViewer from "../components/EventThumbnailViewer";
 import EventActions from "../components/EventActions/EventActions";
+import { Button } from "@/components/ui/button";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 export const eventsColumns: ColumnDef<Event>[] = [
   {
@@ -25,7 +27,21 @@ export const eventsColumns: ColumnDef<Event>[] = [
   },
   {
     accessorKey: "datetime",
-    header: "Fecha y hora",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Fecha y hora
+          {column.getIsSorted() === "asc" ? (
+            <ArrowUp className="ml-2 h-4 w-4" />
+          ) : (
+            <ArrowDown className="ml-2 h-4 w-4" />
+          )}
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const datetime = row.getValue("datetime") as string;
 
@@ -44,6 +60,11 @@ export const eventsColumns: ColumnDef<Event>[] = [
       ) : (
         <Badge variant="outline">Pendiente</Badge>
       );
+    },
+    filterFn: (row, id, filterValue) => {
+      const value = row.getValue(id) ? "completed" : "pending";
+
+      return filterValue.includes(value);
     },
   },
   {

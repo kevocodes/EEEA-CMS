@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 function Events() {
   const events = useEvents((state) => state.events);
   const setEvents = useEvents((state) => state.setEvents);
+  const yearFilter = useEvents((state) => state.yearFilter);
 
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +21,7 @@ function Events() {
     async function fetchData() {
       try {
         setLoading(true);
-        const results = await getEvents();
+        const results = await getEvents(yearFilter);
         setEvents(results);
       } catch (error) {
         if (error instanceof ResponseError) {
@@ -36,7 +37,7 @@ function Events() {
     return () => {
       setEvents([]);
     };
-  }, [setEvents]);
+  }, [setEvents, yearFilter]);
 
   return (
     <PageContainer>

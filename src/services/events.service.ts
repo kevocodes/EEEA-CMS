@@ -5,10 +5,18 @@ import { z } from "zod";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-export const getEvents = async (): Promise<Event[]> => {
-  const response = await fetch(
-    `${BASE_URL}/events?groupedByMonth=false&order=desc`
-  );
+export const getEvents = async (year: string = ""): Promise<Event[]> => {
+  console.log(year)
+  const query = new URLSearchParams();
+
+  query.append("groupedByMonth", "false");
+  query.append("order", "desc");
+
+  if (year) {
+    query.append("year", year);
+  }
+
+  const response = await fetch(`${BASE_URL}/events?${query.toString()}`);
 
   if (!response.ok) {
     if (response.status === 400) {
@@ -178,7 +186,6 @@ export const deleteAllEventImages = async (
   return "Todas las imágenes eliminadas con éxito";
 };
 
-
 export const addImagesToEvent = async (
   eventId: string,
   images: File[],
@@ -202,4 +209,4 @@ export const addImagesToEvent = async (
   }
 
   return "Imágenes agregadas con éxito";
-}
+};
