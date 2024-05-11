@@ -15,6 +15,8 @@ type EventEditParams = {
 };
 
 function EventEditContent() {
+  const [isDisabledTabs, setIsDisabledTabs] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [refetch, setRefetch] = useState(false);
   const [event, setEvent] = useState<EventDetail | null>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
@@ -30,6 +32,7 @@ function EventEditContent() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         const response = await getEventById(eventId!, token!);
         setThumbnail(await urlToFile(response.thumbnail, "thumbnail.webp"));
         setEvent(response);
@@ -37,6 +40,11 @@ function EventEditContent() {
         if (error instanceof ResponseError) {
           toast.error(error.message);
         }
+      } finally {
+        // Hide loading skeleton
+        setLoading(false);
+        // Enable tabs after loading data
+        setIsDisabledTabs(false);
       }
     }
 
@@ -46,17 +54,26 @@ function EventEditContent() {
   return (
     <Tabs defaultValue="information" className="w-full">
       <TabsList>
-        <TabsTrigger value="information">Información</TabsTrigger>
-        {event?.completed && <TabsTrigger value="images">Imágenes</TabsTrigger>}
+        <TabsTrigger disabled={isDisabledTabs} value="information">
+          Información
+        </TabsTrigger>
+        {event?.completed && (
+          <TabsTrigger disabled={isDisabledTabs} value="images">
+            Imágenes
+          </TabsTrigger>
+        )}
       </TabsList>
       <TabsContent value="information" className="flex justify-center w-full">
-        {event && thumbnail && (
+        {!loading && event && thumbnail && (
           <EventEditInformationForm
             event={event}
             thumbnail={thumbnail}
             refetch={refetchData}
-            />
+            setIsDisabledTabs={setIsDisabledTabs}
+          />
         )}
+
+        {loading && <EventEditInformationForm.skeleton />}
       </TabsContent>
       {event?.completed && (
         <TabsContent value="images" className="flex justify-center w-full">

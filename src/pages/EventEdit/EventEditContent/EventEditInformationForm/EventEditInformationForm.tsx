@@ -27,17 +27,20 @@ import {
 import { EventDetail } from "@/models/events.model";
 import { updateEvent, updateEventStatus } from "@/services/events.service";
 import { useAuth } from "@/stores/auth.store";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface EventEditInformationFormProps {
   event: EventDetail;
   thumbnail: File;
   refetch: () => void;
+  setIsDisabledTabs: (value: boolean) => void;
 }
 
 function EventEditInformationForm({
   event,
   thumbnail,
   refetch,
+  setIsDisabledTabs
 }: EventEditInformationFormProps) {
   const token = useAuth((state) => state.token);
 
@@ -54,6 +57,9 @@ function EventEditInformationForm({
 
   const onSubmit = async (values: z.infer<typeof editEventSchema>) => {
     try {
+      // Disable tabs while submitting form
+      setIsDisabledTabs(true);
+
       // Update event in DB
       await Promise.all([
         updateEvent(event.id, values, token!),
@@ -164,3 +170,36 @@ function EventEditInformationForm({
 }
 
 export default EventEditInformationForm;
+
+EventEditInformationForm.skeleton =
+  function EventEditInformationFormSkeleton() {
+    return (
+      <div className="w-full p-8 rounded-lg space-y-8 bg-background">
+        <Skeleton className="w-full h-64 rounded-lg bg-muted" />
+
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1">
+            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+          </div>
+          <div className="flex-1">
+            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1">
+            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+          </div>
+          <div className="flex-1">
+            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <div className="w-full">
+            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+          </div>
+        </div>
+      </div>
+    );
+  };

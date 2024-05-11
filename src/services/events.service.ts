@@ -6,7 +6,6 @@ import { z } from "zod";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getEvents = async (year: string = ""): Promise<Event[]> => {
-  console.log(year)
   const query = new URLSearchParams();
 
   query.append("groupedByMonth", "false");

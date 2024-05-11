@@ -60,7 +60,7 @@ export function EventTableFacetedFilter<TData, TValue>({
                     variant="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
-                    {selectedValues.size} selected
+                    {selectedValues.size} seleccionados
                   </Badge>
                 ) : (
                   options
@@ -84,7 +84,7 @@ export function EventTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>Sin resultados.</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);
@@ -98,7 +98,6 @@ export function EventTableFacetedFilter<TData, TValue>({
                         selectedValues.add(option.value);
                       }
                       const filterValues = Array.from(selectedValues);
-                      console.log(filterValues, "filterValues")
                       column?.setFilterValue(
                         filterValues.length ? filterValues : undefined
                       );
@@ -135,7 +134,7 @@ export function EventTableFacetedFilter<TData, TValue>({
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    Limpiar filtros
                   </CommandItem>
                 </CommandGroup>
               </>
