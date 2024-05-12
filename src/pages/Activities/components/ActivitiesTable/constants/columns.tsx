@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Activity, Creator } from "@/models/activities.mode";
+import { Activity, Creator } from "@/models/activities.model";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { ArrowDown, ArrowUp } from "lucide-react";

@@ -9,6 +9,7 @@ import { useEvents } from "@/stores/events.store";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PRIVATE_ROUTES } from "@/constants/routes";
 
 function Events() {
   const events = useEvents((state) => state.events);
@@ -43,7 +44,7 @@ function Events() {
     <PageContainer>
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Eventos</h2>
-        <Link to="/events/create" className="w-full sm:w-fit">
+        <Link to={PRIVATE_ROUTES.EVENTS_CREATE} className="w-full sm:w-fit">
           <Button className="w-full sm:w-fit">
             <Plus size={16} className="mr-2" />
             Crear evento

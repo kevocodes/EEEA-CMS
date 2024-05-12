@@ -17,6 +17,9 @@ import EventEdit from "@/pages/EventEdit/EventEdit";
 import Activities from "./pages/Activities/Activities";
 import ActivityCreate from "./pages/ActivityCreate/ActivityCreate";
 import ActivityEdit from "./pages/ActivityEdit/ActivityEdit";
+import Installations from "./pages/Installations/Installations";
+import InstallationCreate from "./pages/InstallationCreate/InstallationCreate";
+import InstallationEdit from "./pages/InstallationEdit/InstallationEdit";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -62,11 +65,11 @@ function App() {
               <Route index element={<Events />} />
               <Route path={PRIVATE_ROUTES.EVENTS} element={<Events />} />
               <Route
-                path={`${PRIVATE_ROUTES.EVENTS}/create`}
+                path={PRIVATE_ROUTES.EVENTS_CREATE}
                 element={<EventCreate />}
               />
               <Route
-                path={`${PRIVATE_ROUTES.EVENTS}/edit/:eventId`}
+                path={`${PRIVATE_ROUTES.EVENTS_EDIT}/:eventId`}
                 element={<EventEdit />}
               />
               <Route
@@ -74,12 +77,24 @@ function App() {
                 element={<Activities />}
               />
               <Route
-                path={`${PRIVATE_ROUTES.ACTIVITIES}/create`}
+                path={PRIVATE_ROUTES.ACTIVITIES_CREATE}
                 element={<ActivityCreate />}
               />
               <Route
-                path={`${PRIVATE_ROUTES.ACTIVITIES}/edit/:activityId`}
+                path={`${PRIVATE_ROUTES.ACTIVITIES_EDIT}/:activityId`}
                 element={<ActivityEdit />}
+              />
+              <Route
+                path={PRIVATE_ROUTES.INSTALLATIONS}
+                element={<Installations />}
+              />
+              <Route
+                path={PRIVATE_ROUTES.INSTALLATIONS_CREATE}
+                element={<InstallationCreate />}
+              />
+              <Route
+                path={`${PRIVATE_ROUTES.INSTALLATIONS_EDIT}/:installationId`}
+                element={<InstallationEdit />}
               />
             </Route>
           </Route>

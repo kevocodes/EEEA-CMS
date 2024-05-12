@@ -8,7 +8,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Dialog } from "@/components/ui/dialog";
 import { useState } from "react";
-import { Activity } from "@/models/activities.mode";
+import { Activity } from "@/models/activities.model";
 import ActivityActionDeleteButton from "./components/ActivityActionDeleteButton";
 import ActivityActionEditButton from "./components/ActivityActionEditButton";
 import ActivityActionDeleteDialog from "./components/ActivityActionDeleteDialog";

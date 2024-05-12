@@ -53,10 +53,10 @@ function CustomImage({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              Estas seguro/a que deseas eliminar la imágen del evento?
+              Estas seguro/a que deseas eliminar la imagen del evento?
             </DialogTitle>
             <DialogDescription>
-              Esta acción no puede ser revertida. La imágen será completamente
+              Esta acción no puede ser revertida. La imagen será completamente
               eliminada y no podrá recuperarse.
             </DialogDescription>
           </DialogHeader>

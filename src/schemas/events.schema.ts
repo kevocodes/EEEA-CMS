@@ -29,12 +29,12 @@ export const createEventSchema = z.object({
       return Array.from(files ?? []).every(
         (file) => sizeInMB(file.size) <= MAX_IMAGE_MB_SIZE
       );
-    }, `El tamaño máximo de la imágen es de ${MAX_IMAGE_MB_SIZE} MB`)
+    }, `El tamaño máximo de la imagen es de ${MAX_IMAGE_MB_SIZE} MB`)
     .refine((files) => {
       return Array.from(files ?? []).every((file) =>
         ACCEPTED_IMAGE_TYPES.includes(file.type)
       );
-    }, "Tipo de archivo de imágen no soportado"),
+    }, "Tipo de archivo de imagen no soportado"),
 });
 
 export const editEventSchema = z.object({
@@ -57,12 +57,12 @@ export const editEventSchema = z.object({
       return Array.from(files ?? []).every(
         (file) => sizeInMB(file.size) <= MAX_IMAGE_MB_SIZE
       );
-    }, `El tamaño máximo de la imágen es de ${MAX_IMAGE_MB_SIZE} MB`)
+    }, `El tamaño máximo de la imagen es de ${MAX_IMAGE_MB_SIZE} MB`)
     .refine((files) => {
       return Array.from(files ?? []).every((file) =>
         ACCEPTED_IMAGE_TYPES.includes(file.type)
       );
-    }, "Tipo de archivo de imágen no soportado"),
+    }, "Tipo de archivo de imagen no soportado"),
 });
 
 export const addEventImageSchema = z.object({

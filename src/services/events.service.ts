@@ -32,13 +32,9 @@ export const getEvents = async (year: string = ""): Promise<Event[]> => {
 
 export const getEventById = async (
   eventId: string,
-  token: string
 ): Promise<EventDetail> => {
   const response = await fetch(`${BASE_URL}/events/${eventId}`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   });
 
   if (!response.ok) {

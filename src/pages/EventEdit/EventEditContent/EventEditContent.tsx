@@ -16,13 +16,12 @@ type EventEditParams = {
 
 function EventEditContent() {
   const [isDisabledTabs, setIsDisabledTabs] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(false);
   const [event, setEvent] = useState<EventDetail | null>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
 
   const { eventId } = useParams<EventEditParams>();
-  const token = useAuth((state) => state.token);
 
   // Function to refetch data and update UI
   const refetchData = () => {
@@ -33,7 +32,7 @@ function EventEditContent() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await getEventById(eventId!, token!);
+        const response = await getEventById(eventId!);
         setThumbnail(await urlToFile(response.thumbnail, "thumbnail.webp"));
         setEvent(response);
       } catch (error) {
@@ -49,7 +48,7 @@ function EventEditContent() {
     }
 
     fetchData();
-  }, [eventId, token, refetch]);
+  }, [eventId, refetch]);
 
   return (
     <Tabs defaultValue="information" className="w-full">

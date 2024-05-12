@@ -16,7 +16,7 @@ import { z } from "zod";
 import { LoaderCircle } from "lucide-react";
 import { useAuth } from "@/stores/auth.store";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ActivityDetail } from "@/models/activities.mode";
+import { ActivityDetail } from "@/models/activities.model";
 import { editActivitySchema } from "@/schemas/activities.schema";
 import ActivityEditFormDatePicker from "./components/ActivityEditFormDatePicker";
 import { updateActivity } from "@/services/activities.service";

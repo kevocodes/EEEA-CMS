@@ -9,6 +9,7 @@ import { activitiesColumns } from "./components/ActivitiesTable/constants/column
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { PRIVATE_ROUTES } from "@/constants/routes";
 
 function Activities() {
   const activities = useActivities((state) => state.activities);
@@ -43,7 +44,10 @@ function Activities() {
     <PageContainer>
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Actividades</h2>
-        <Link to="/activities/create" className="w-full sm:w-fit">
+        <Link
+          to={PRIVATE_ROUTES.ACTIVITIES_CREATE}
+          className="w-full sm:w-fit"
+        >
           <Button className="w-full sm:w-fit">
             <Plus size={16} className="mr-2" />
             Crear actividad

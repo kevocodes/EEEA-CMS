@@ -1,5 +1,6 @@
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Activity } from "@/models/activities.mode";
+import { PRIVATE_ROUTES } from "@/constants/routes";
+import { Activity } from "@/models/activities.model";
 import { Link } from "react-router-dom";
 
 interface ActivityActionEditButtonProps {
@@ -8,7 +9,7 @@ interface ActivityActionEditButtonProps {
 
 function ActivityActionEditButton({ activity }: ActivityActionEditButtonProps) {
   return (
-    <Link to={`/activities/edit/${activity.id}`}>
+    <Link to={`${PRIVATE_ROUTES.ACTIVITIES_EDIT}/${activity.id}`}>
       <DropdownMenuItem className="cursor-pointer">Editar</DropdownMenuItem>
     </Link>
   );

@@ -73,7 +73,7 @@ export default function AddEventImagesDropzone({ form }: DropzoneProps) {
                 <EventImageDropzoneContent
                   description={
                     acceptedFiles.length === 0
-                      ? "Arrastra la imagen o haz clic aquí"
+                      ? "Arrastra las imágenes o haz clic aquí"
                       : ""
                   }
                   acceptedFiles={acceptedFiles}

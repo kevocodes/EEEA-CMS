@@ -1,6 +1,9 @@
-import { Activity, ActivityDetail } from "@/models/activities.mode";
+import { Activity, ActivityDetail } from "@/models/activities.model";
 import { ResponseError } from "@/models/responseError.model";
-import { createActivitySchema, editActivitySchema } from "@/schemas/activities.schema";
+import {
+  createActivitySchema,
+  editActivitySchema,
+} from "@/schemas/activities.schema";
 import { z } from "zod";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -31,13 +34,10 @@ export const getActivities = async (year: string = ""): Promise<Activity[]> => {
 };
 
 export const getActivityById = async (
-  activityId: string,
-  token: string
+  activityId: string
 ): Promise<ActivityDetail> => {
   const response = await fetch(`${BASE_URL}/activities/${activityId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    method: "GET",
   });
 
   if (!response.ok) {
@@ -51,7 +51,7 @@ export const getActivityById = async (
   const { data } = await response.json();
 
   return data;
-}
+};
 
 export const createActivity = async (
   activity: z.infer<typeof createActivitySchema>,
@@ -96,7 +96,7 @@ export const updateActivity = async (
   }
 
   return "Actividad actualizada con éxito";
-}
+};
 
 export const deleteActivity = async (
   activityId: string,
