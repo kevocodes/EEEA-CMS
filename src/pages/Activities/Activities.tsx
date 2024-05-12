@@ -15,7 +15,7 @@ function Activities() {
   const setActivities = useActivities((state) => state.setActivities);
   const yearFilter = useActivities((state) => state.yearFilter);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {

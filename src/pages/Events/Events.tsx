@@ -15,7 +15,7 @@ function Events() {
   const setEvents = useEvents((state) => state.setEvents);
   const yearFilter = useEvents((state) => state.yearFilter);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
