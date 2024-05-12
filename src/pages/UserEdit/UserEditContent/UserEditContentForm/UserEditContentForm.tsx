@@ -27,6 +27,7 @@ import {
 import { translateRole } from "@/pages/Users/components/UsersTable/utils/translateRole";
 import { updateUserSchema } from "@/schemas/users.schema";
 import { updateUser } from "@/services/users.service";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface UserEditContentFormProps {
   user: UserDBDetail;
@@ -179,3 +180,25 @@ function UserEditContentForm({ user }: UserEditContentFormProps) {
 }
 
 export default UserEditContentForm;
+
+UserEditContentForm.skeleton = function UserEditContentFormSkeleton() {
+  return (
+    <div className="w-full p-8 rounded-lg space-y-8 bg-background">
+      <div className="flex flex-col md:flex-row gap-4">
+        <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+        <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4">
+        <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+        <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+      </div>
+
+      <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+      
+      <div className="flex gap-2">
+        <Skeleton className="w-full h-9 bg-muted rounded-lg" />
+      </div>
+    </div>
+  );
+};

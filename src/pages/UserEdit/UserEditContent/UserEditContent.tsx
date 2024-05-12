@@ -40,7 +40,7 @@ function UserEditContent() {
     <>
       {!loading && user && <UserEditContentForm user={user} />}
 
-      {/* {loading && <UserEditInformationForm.skeleton />} */}
+      {loading && <UserEditContentForm.skeleton />}
     </>
   );
 }
