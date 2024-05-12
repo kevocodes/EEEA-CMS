@@ -11,7 +11,7 @@ function CustomInstallationImage({
     <div className="relative group">
       <InstallationActions installationId={String(key)} />
       <img
-        alt="Event image"
+        alt={(caption as string) || "Installation Image"}
         src={src}
         style={style}
         key={key}

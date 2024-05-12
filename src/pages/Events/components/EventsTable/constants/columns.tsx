@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Event } from "@/models/events.model";
+import { Creator, Event } from "@/models/events.model";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import EventThumbnailViewer from "../components/EventThumbnailViewer";
@@ -66,6 +66,15 @@ export const eventsColumns: ColumnDef<Event>[] = [
       const value = row.getValue(id) ? "completed" : "pending";
 
       return filterValue.includes(value);
+    },
+  },
+  {
+    accessorKey: "creator",
+    header: "Creador",
+    cell: ({ row }) => {
+      const creator = row.getValue("creator") as Creator;
+
+      return <div>{`${creator.name} ${creator.lastname}`}</div>;
     },
   },
   {

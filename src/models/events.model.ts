@@ -7,6 +7,7 @@ export interface Event {
   thumbnail: string;
   public_id: string;
   creatorId: string;
+  creator: Creator;
   createdAt: string;
   updatedAt: string;
   images: EventImage[];
@@ -19,9 +20,7 @@ export interface EventImage {
   height: number;
 }
 
-export interface EventDetail extends Event {
-  creator: Creator;
-}
+export interface EventDetail extends Event {}
 
 export interface Creator {
   id: string;
