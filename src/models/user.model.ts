@@ -15,6 +15,8 @@ export interface UserDB {
   updatedAt: string;
 }
 
+export interface UserDBDetail extends UserDB {}
+
 export enum Role {
   ADMIN = "ADMIN",
   CONTENT_MANAGER = "CONTENT_MANAGER",

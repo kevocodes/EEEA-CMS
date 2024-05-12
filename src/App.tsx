@@ -21,6 +21,7 @@ import InstallationCreate from "@/pages/InstallationCreate/InstallationCreate";
 import InstallationEdit from "@/pages/InstallationEdit/InstallationEdit";
 import Users from "@/pages/Users/Users";
 import UserCreate from "@/pages/UsersCreate/UserCreate";
+import UserEdit from "@/pages/UserEdit/UserEdit";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -100,6 +101,10 @@ function App() {
               <Route
                 path={PRIVATE_ROUTES.USERS_CREATE}
                 element={<UserCreate />}
+              />
+              <Route
+                path={`${PRIVATE_ROUTES.USERS_EDIT}/:userId`}
+                element={<UserEdit />}
               />
             </Route>
           </Route>

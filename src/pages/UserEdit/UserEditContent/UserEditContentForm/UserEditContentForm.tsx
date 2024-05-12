@@ -15,10 +15,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { LoaderCircle } from "lucide-react";
 import { useAuth } from "@/stores/auth.store";
-import { useNavigate } from "react-router-dom";
-import { PRIVATE_ROUTES } from "@/constants/routes";
-import { createUserSchema } from "@/schemas/users.schema";
-import { Role } from "@/models/user.model";
+import { Role, UserDBDetail } from "@/models/user.model";
 import PasswordCheckList from "./components/PasswordCheckList";
 import {
   Select,
@@ -28,30 +25,42 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { translateRole } from "@/pages/Users/components/UsersTable/utils/translateRole";
-import { createUser } from "@/services/users.service";
+import { updateUserSchema } from "@/schemas/users.schema";
+import { updateUser } from "@/services/users.service";
 
-function UserCreateForm() {
-  const navigate = useNavigate();
+interface UserEditContentFormProps {
+  user: UserDBDetail;
+}
+
+function UserEditContentForm({ user }: UserEditContentFormProps) {
   const token = useAuth((state) => state.token);
 
-  const form = useForm<z.infer<typeof createUserSchema>>({
-    resolver: zodResolver(createUserSchema),
+  const form = useForm<z.infer<typeof updateUserSchema>>({
+    resolver: zodResolver(updateUserSchema),
     defaultValues: {
-      name: "",
-      lastname: "",
-      email: "",
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
       password: "",
-      role: Role.CONTENT_MANAGER,
+      role: user.role,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof createUserSchema>) => {
+  const onSubmit = async (values: z.infer<typeof updateUserSchema>) => {
     try {
-      const respose = await createUser(values, token!);
+      if (!values.password) delete values.password;
+
+      const respose = await updateUser(user.id, values, token!);
       toast.success(respose);
-      navigate(PRIVATE_ROUTES.USERS);
     } catch (error) {
       if (error instanceof ResponseError) {
+        if (error.status === 409) {
+          form.setError("email", {
+            type: "manual",
+            message: "Correo electrónico se encuentra en uso",
+          });
+        }
+
         toast.error(error.message);
       }
     }
@@ -161,7 +170,7 @@ function UserCreateForm() {
             {form.formState.isSubmitting && (
               <LoaderCircle size={16} className="animate-spin mr-2" />
             )}
-            Crear Usuario
+            Actualizar Usuario
           </Button>
         </div>
       </form>
@@ -169,4 +178,4 @@ function UserCreateForm() {
   );
 }
 
-export default UserCreateForm;
+export default UserEditContentForm;

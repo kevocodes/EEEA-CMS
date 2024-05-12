@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ResponseError } from "@/models/responseError.model";
 import { useParams } from "react-router-dom";
-import { useAuth } from "@/stores/auth.store";
 import { ActivityDetail } from "@/models/activities.model";
 import { getActivityById } from "@/services/activities.service";
 import ActivityEditInformationForm from "./ActivityEditInformationForm/ActivityEditInformationForm";
@@ -16,7 +15,6 @@ function EventEditContent() {
   const [activity, setActivity] = useState<ActivityDetail | null>(null);
 
   const { activityId } = useParams<ActivityEditParams>();
-  const token = useAuth((state) => state.token);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,7 +32,7 @@ function EventEditContent() {
     }
 
     fetchData();
-  }, [activityId, token]);
+  }, [activityId]);
 
   return (
     <>
