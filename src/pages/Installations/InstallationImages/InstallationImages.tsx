@@ -4,6 +4,8 @@ import { Installation } from "@/models/installations.model";
 import DeleteAllInstallationsButton from "./components/DeleteAllInstallationsButton/DeleteAllInstallationsButton";
 import CustomInstallationImage from "./components/CustomImage/CustomInstallationImage";
 import CreateInstallationButton from "./components/CreateInstallationButton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { skeletonImages } from "./data/skeleton-images";
 
 interface InstallationImagesProps {
   images: Installation[];
@@ -35,3 +37,22 @@ function InstallationImages({ images }: InstallationImagesProps) {
 }
 
 export default InstallationImages;
+
+InstallationImages.skeleton = function InstallationImagesSkeleton() {
+  return (
+    <div className="w-full flex flex-col gap-4 bg-background p-8 rounded-lg">
+      <div className="flex flex-col md:flex-row justify-between gap-2">
+        <Skeleton className="h-9 w-full bg-muted md:max-w-24" />
+
+        <Skeleton className="h-9 w-full bg-muted md:max-w-44" />
+      </div>
+      <Gallery
+        images={skeletonImages}
+        enableImageSelection={false}
+        thumbnailImageComponent={(props) => {
+          return <CustomInstallationImage.skeleton {...props} />;
+        }}
+      />
+    </div>
+  );
+};

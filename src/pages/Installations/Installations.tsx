@@ -39,7 +39,11 @@ function Installations() {
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Instalaciones</h2>
       </div>
-      <InstallationImages images={installations} />
+      {!loading && installations && (
+        <InstallationImages images={installations} />
+      )}
+
+      {loading && <InstallationImages.skeleton />}
     </PageContainer>
   );
 }
