@@ -2,35 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
-import { statuses } from "../constants/status";
-import { EventTableFacetedCompletedFilter } from "./EventTableFacetedCompletedFilter";
-import EventTableYearSelect from "./EventTableYearSelect";
 import { Separator } from "@/components/ui/separator";
-import { useEvents } from "@/stores/events.store";
+import ActivityTableYearSelect from "./ActivityTableYearSelect";
+import { useActivities } from "@/stores/activities.store";
 import dayjs from "dayjs";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
 
-export function EventTableToolbar<TData>({
+export function ActivityTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const yearFilter = useEvents((state) => state.yearFilter);
-  const setYearFilter = useEvents((state) => state.setYearFilter);
+  const setYearFilter = useActivities((state) => state.setYearFilter);
+  const yearFilter = useActivities((state) => state.yearFilter);
 
-  const isFiltered =
-    table.getState().columnFilters.length > 0 ||
-    yearFilter !== dayjs().year().toString();
+  const isFiltered = table.getState().columnFilters.length > 0 || yearFilter !== dayjs().year().toString();
 
   const handleResetFilters = () => {
     table.resetColumnFilters();
     setYearFilter(dayjs().year().toString());
-  };
+  }
 
   return (
     <div className="flex flex-col sm:flex-row flex-1 items-center gap-2">
-      <EventTableYearSelect />
+      <ActivityTableYearSelect />
 
       <Separator orientation="vertical" className="hidden sm:block h-4" />
       <Separator orientation="horizontal" className="sm:hidden block w-full" />
@@ -45,14 +41,6 @@ export function EventTableToolbar<TData>({
       />
 
       <div className="flex items-center justify-center gap-2 self-start">
-        {table.getColumn("completed") && (
-          <EventTableFacetedCompletedFilter
-            column={table.getColumn("completed")}
-            title="Estado"
-            options={statuses}
-          />
-        )}
-
         {isFiltered && (
           <Button
             variant="ghost"

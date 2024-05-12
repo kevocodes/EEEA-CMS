@@ -14,6 +14,9 @@ import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import EventCreate from "@/pages/EventCreate/EventCreate";
 import EventEdit from "@/pages/EventEdit/EventEdit";
+import Activities from "./pages/Activities/Activities";
+import ActivityCreate from "./pages/ActivityCreate/ActivityCreate";
+import ActivityEdit from "./pages/ActivityEdit/ActivityEdit";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -65,6 +68,18 @@ function App() {
               <Route
                 path={`${PRIVATE_ROUTES.EVENTS}/edit/:eventId`}
                 element={<EventEdit />}
+              />
+              <Route
+                path={PRIVATE_ROUTES.ACTIVITIES}
+                element={<Activities />}
+              />
+              <Route
+                path={`${PRIVATE_ROUTES.ACTIVITIES}/create`}
+                element={<ActivityCreate />}
+              />
+              <Route
+                path={`${PRIVATE_ROUTES.ACTIVITIES}/edit/:activityId`}
+                element={<ActivityEdit />}
               />
             </Route>
           </Route>

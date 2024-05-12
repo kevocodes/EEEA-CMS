@@ -1,7 +1,7 @@
 import { SidebarItem, SidebarItemLogout } from "./SidebarItem";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 import { useSidebar } from "@/stores/sidebar.store";
-import { CalendarClock, LogOut } from "lucide-react";
+import { CalendarClock, LogOut, Notebook } from "lucide-react";
 
 interface SidebarContentProps {
   isMobile?: boolean;
@@ -20,6 +20,14 @@ export const SidebarContent = ({ isMobile }: SidebarContentProps) => {
         isIndexRoute
       >
         <CalendarClock size={24} />
+      </SidebarItem>
+
+      <SidebarItem
+        label="Actividades"
+        to={PRIVATE_ROUTES.ACTIVITIES}
+        isSidebarOpen={isSidebarOpen}
+      >
+        <Notebook size={24} />
       </SidebarItem>
 
       <SidebarItemLogout label="Cerrar sesión" isSidebarOpen={isSidebarOpen}>

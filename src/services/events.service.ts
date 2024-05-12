@@ -100,8 +100,8 @@ export const updateEvent = async (
   });
 
   if (!response.ok) {
-    if (response.status === 400) {
-      throw new ResponseError("Rango de meses inválido", response.status);
+    if (response.status === 404) {
+      throw new ResponseError("Evento no encontrado", response.status);
     }
 
     throw new ResponseError("Ups...Algo salió mal", response.status);
@@ -143,6 +143,10 @@ export const deleteEvent = async (
   });
 
   if (!response.ok) {
+    if (response.status === 404) {
+      throw new ResponseError("Evento no encontrado", response.status);
+    }
+
     throw new ResponseError("Ups...Algo salió mal", response.status);
   }
 

@@ -7,13 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEvents } from "@/stores/events.store";
+import { useActivities } from "@/stores/activities.store";
 import dayjs from "dayjs";
 
-function EventTableYearSelect() {
+function ActivityTableYearSelect() {
   const year = dayjs().year();
-  const yearSelection = useEvents((state) => state.yearFilter);
-  const setYearSelection = useEvents((state) => state.setYearFilter);
+  const yearSelection = useActivities((state) => state.yearFilter);
+  const setYearSelection = useActivities((state) => state.setYearFilter);
 
   return (
     <Select onValueChange={setYearSelection} value={yearSelection}>
@@ -35,4 +35,4 @@ function EventTableYearSelect() {
   );
 }
 
-export default EventTableYearSelect;
+export default ActivityTableYearSelect;
