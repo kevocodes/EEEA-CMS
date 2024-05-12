@@ -175,29 +175,29 @@ EventEditInformationForm.skeleton =
   function EventEditInformationFormSkeleton() {
     return (
       <div className="w-full p-8 rounded-lg space-y-8 bg-background">
-        <Skeleton className="w-full h-64 rounded-lg bg-muted" />
+        <Skeleton className="w-full h-60 rounded-lg bg-muted" />
 
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+            <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
           </div>
           <div className="flex-1">
-            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+            <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+            <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
           </div>
           <div className="flex-1">
-            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+            <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
           </div>
         </div>
 
         <div className="flex gap-2">
           <div className="w-full">
-            <Skeleton className="w-full h-8 bg-muted rounded-lg" />
+            <Skeleton className="w-full h-9 bg-muted rounded-lg" />
           </div>
         </div>
       </div>
