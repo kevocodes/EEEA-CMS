@@ -58,7 +58,7 @@ function EventsTable<TData, TValue>({
   return (
     <div className="w-full flex flex-col gap-4">
       <EventTableToolbar table={table} />
-      <div className="rounded-md border w-full bg-background flex flex-col gap-4 pb-4">
+      <div className="rounded-md border w-full bg-background flex flex-col gap-4">
         <Table>
           <TableHeader className="bg-muted">
             {table.getHeaderGroups().map((headerGroup) => (

@@ -30,10 +30,11 @@ export const eventsColumns: ColumnDef<Event>[] = [
     header: ({ column }) => {
       return (
         <Button
+          className="p-0"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Fecha y hora
+          Fecha
           {column.getIsSorted() === "asc" ? (
             <ArrowUp className="ml-2 h-4 w-4" />
           ) : (

@@ -20,6 +20,7 @@ import { ActivityDetail } from "@/models/activities.mode";
 import { editActivitySchema } from "@/schemas/activities.schema";
 import ActivityEditFormDatePicker from "./components/ActivityEditFormDatePicker";
 import { updateActivity } from "@/services/activities.service";
+import { Switch } from "@/components/ui/switch";
 
 interface ActivityEditInformationFormProps {
   activity: ActivityDetail;
@@ -35,6 +36,7 @@ function ActivityEditInformationForm({
     defaultValues: {
       title: activity.title,
       datetime: new Date(activity.datetime), // Convert string to Date
+      isAllDay: activity.isAllDay,
     },
   });
 
@@ -71,8 +73,29 @@ function ActivityEditInformationForm({
 
         <FormField
           control={form.control}
+          name="isAllDay"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border py-2 px-3 shadow-sm">
+              <div className="space-y-0.5">
+                <FormLabel>¿Es todo el día?</FormLabel>
+              </div>
+              <FormControl>
+                <Switch
+                  className="!mt-0"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="datetime"
-          render={({ field }) => <ActivityEditFormDatePicker field={field} />}
+          render={({ field }) => (
+            <ActivityEditFormDatePicker field={field} state={form.watch} />
+          )}
         />
 
         <div className="flex gap-2">
@@ -97,8 +120,13 @@ ActivityEditInformationForm.skeleton =
         <div className="flex-1">
           <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
         </div>
+
         <div className="flex-1">
-          <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
+          <Skeleton className="w-full h-[41.6px] bg-muted rounded-lg" />
+        </div>
+        
+        <div className="flex-1">
+          <Skeleton className="w-full h-[58px] bg-muted rounded-lg" />
         </div>
 
         <div className="flex gap-2">

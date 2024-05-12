@@ -7,6 +7,7 @@ export const createActivitySchema = z.object({
     .refine((value) => value > new Date(), {
       message: "La fecha debe ser mayor a la actual",
     }),
+  isAllDay: z.boolean(),
 });
 
 export const editActivitySchema = createActivitySchema;

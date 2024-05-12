@@ -15,10 +15,11 @@ export const activitiesColumns: ColumnDef<Activity>[] = [
     header: ({ column }) => {
       return (
         <Button
+          className="p-0"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Fecha y hora
+          Fecha
           {column.getIsSorted() === "asc" ? (
             <ArrowUp className="ml-2 h-4 w-4" />
           ) : (
@@ -28,9 +29,16 @@ export const activitiesColumns: ColumnDef<Activity>[] = [
       );
     },
     cell: ({ row }) => {
+      const { isAllDay } = row.original;
       const datetime = row.getValue("datetime") as string;
 
-      return <div>{dayjs(datetime).format("DD/MM/YYYY - HH:mm")}</div>;
+      const datetimeFormat = isAllDay ? "DD/MM/YYYY" : "DD/MM/YYYY - HH:mm";
+
+      return isAllDay ? (
+        <div>{dayjs(datetime).format(datetimeFormat)} - todo el día</div>
+      ) : (
+        <div>{dayjs(datetime).format(datetimeFormat)}</div>
+      );
     },
   },
   {

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { createActivitySchema } from "@/schemas/activities.schema";
 import dayjs from "dayjs";
 import { CalendarIcon } from "lucide-react";
-import { ControllerRenderProps } from "react-hook-form";
+import { ControllerRenderProps, UseFormWatch } from "react-hook-form";
 import { z } from "zod";
 
 interface ActivityFormDatePickerProps {
@@ -20,13 +20,19 @@ interface ActivityFormDatePickerProps {
     z.infer<typeof createActivitySchema>,
     "datetime"
   >;
+  state: UseFormWatch<z.infer<typeof createActivitySchema>>;
 }
 
-function ActivityCreateFormDatePicker({ field }: ActivityFormDatePickerProps) {
+function ActivityCreateFormDatePicker({
+  field,
+  state,
+}: ActivityFormDatePickerProps) {
   return (
     <>
       <FormItem className="flex flex-col">
-        <FormLabel className="text-left">Fecha y hora</FormLabel>
+        <FormLabel className="text-left">
+          {state("isAllDay") ? "Fecha" : "Fecha y hora"}
+        </FormLabel>
         <Dialog>
           <FormControl>
             <DialogTrigger asChild>
@@ -39,7 +45,9 @@ function ActivityCreateFormDatePicker({ field }: ActivityFormDatePickerProps) {
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {field.value ? (
-                  dayjs(field.value).format("DD/MM/YYYY - HH:mm")
+                  dayjs(field.value).format(
+                    state("isAllDay") ? "DD/MM/YYYY" : "DD/MM/YYYY HH:mm"
+                  )
                 ) : (
                   <span>Selecciona una fecha</span>
                 )}
@@ -55,9 +63,11 @@ function ActivityCreateFormDatePicker({ field }: ActivityFormDatePickerProps) {
               onSelect={field.onChange}
               initialFocus
             />
-            <div className="p-3 border-t border-border">
-              <TimePicker setDate={field.onChange} date={field.value} />
-            </div>
+            {!state("isAllDay") && (
+              <div className="p-3 border-t border-border">
+                <TimePicker setDate={field.onChange} date={field.value} />
+              </div>
+            )}
           </DialogContent>
         </Dialog>
       </FormItem>

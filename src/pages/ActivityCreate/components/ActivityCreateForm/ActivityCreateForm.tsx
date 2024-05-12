@@ -20,6 +20,7 @@ import { PRIVATE_ROUTES } from "@/constants/routes";
 import { createActivitySchema } from "@/schemas/activities.schema";
 import ActivityCreateFormDatePicker from "./components/ActivityCreateFormDatePicker";
 import { createActivity } from "@/services/activities.service";
+import { Switch } from "@/components/ui/switch";
 
 function ActivityCreateForm() {
   const navigate = useNavigate();
@@ -66,8 +67,29 @@ function ActivityCreateForm() {
 
         <FormField
           control={form.control}
+          name="isAllDay"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border py-2 px-3 shadow-sm">
+              <div className="space-y-0.5">
+                <FormLabel>¿Es todo el día?</FormLabel>
+              </div>
+              <FormControl>
+                <Switch
+                  className="!mt-0"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="datetime"
-          render={({ field }) => <ActivityCreateFormDatePicker field={field} />}
+          render={({ field }) => (
+            <ActivityCreateFormDatePicker field={field} state={form.watch} />
+          )}
         />
 
         <div className="flex gap-2">
