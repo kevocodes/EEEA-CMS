@@ -28,13 +28,13 @@ export function UsersTableToolbar<TData>({
         className="h-8 w-full sm:max-w-[250px] bg-background"
       />
 
-      <UsersTableFacetedFilter
-        column={table.getColumn("role")}
-        title="Rol"
-        options={roles}
-      />
-
       <div className="flex items-center justify-center gap-2 self-start">
+        <UsersTableFacetedFilter
+          column={table.getColumn("role")}
+          title="Rol"
+          options={roles}
+        />
+
         {isFiltered && (
           <Button
             variant="ghost"
