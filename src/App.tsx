@@ -20,6 +20,7 @@ import Installations from "@/pages/Installations/Installations";
 import InstallationCreate from "@/pages/InstallationCreate/InstallationCreate";
 import InstallationEdit from "@/pages/InstallationEdit/InstallationEdit";
 import Users from "@/pages/Users/Users";
+import UserCreate from "@/pages/UsersCreate/UserCreate";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -96,6 +97,10 @@ function App() {
 
             <Route element={<RequireAuth allowedRoles={[Role.ADMIN]} />}>
               <Route path={PRIVATE_ROUTES.USERS} element={<Users />} />
+              <Route
+                path={PRIVATE_ROUTES.USERS_CREATE}
+                element={<UserCreate />}
+              />
             </Route>
           </Route>
         </Routes>
