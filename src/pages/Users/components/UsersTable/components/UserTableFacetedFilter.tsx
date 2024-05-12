@@ -31,7 +31,7 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   }[];
 }
 
-export function EventTableFacetedFilter<TData, TValue>({
+export function UsersTableFacetedFilter<TData, TValue>({
   column,
   title,
   options,

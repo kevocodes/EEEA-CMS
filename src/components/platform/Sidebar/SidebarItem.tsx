@@ -3,6 +3,7 @@ import { useAuth } from "@/stores/auth.store";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { PRIVATE_ROUTES } from "@/constants/routes";
+import { Role } from "@/models/user.model";
 
 interface SidebarItemProps {
   children?: React.ReactNode;
@@ -10,6 +11,7 @@ interface SidebarItemProps {
   to: string;
   isIndexRoute?: boolean;
   isSidebarOpen?: boolean;
+  allowedRoles?: Role[];
 }
 
 const variants = {
@@ -23,10 +25,16 @@ export const SidebarItem = ({
   to,
   isSidebarOpen,
   isIndexRoute,
+  allowedRoles,
 }: SidebarItemProps) => {
+  const user = useAuth((state) => state.user);
+
   const pathname = useLocation().pathname;
   const isActive =
     pathname.includes(to) || (isIndexRoute && pathname === PRIVATE_ROUTES.HOME);
+
+  // Check if user has the required role to access the route
+  if (allowedRoles && !allowedRoles.includes(user?.role as Role)) return null;
 
   return (
     <Link

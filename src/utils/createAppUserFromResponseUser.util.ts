@@ -1,7 +1,6 @@
-import { User } from "@/models/user.model";
-import { UserResponseDTO } from "@/types/auth.types";
+import { User, UserDB } from "@/models/user.model";
 
-export const createAppUserFromResponseUser = (responseUser: UserResponseDTO): User => {
+export const createAppUserFromResponseUser = (responseUser: UserDB): User => {
   return {
     email: responseUser.email,
     lastname: responseUser.lastname,

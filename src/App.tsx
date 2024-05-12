@@ -6,7 +6,6 @@ import AppLayout from "@/layouts/AppLayout";
 import { Role } from "@/models/user.model";
 import Events from "@/pages/Events/Events";
 import Login from "@/pages/Login/Login";
-import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import { validateSession } from "@/services/auth.service";
 import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
@@ -14,12 +13,13 @@ import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import EventCreate from "@/pages/EventCreate/EventCreate";
 import EventEdit from "@/pages/EventEdit/EventEdit";
-import Activities from "./pages/Activities/Activities";
-import ActivityCreate from "./pages/ActivityCreate/ActivityCreate";
-import ActivityEdit from "./pages/ActivityEdit/ActivityEdit";
-import Installations from "./pages/Installations/Installations";
-import InstallationCreate from "./pages/InstallationCreate/InstallationCreate";
-import InstallationEdit from "./pages/InstallationEdit/InstallationEdit";
+import Activities from "@/pages/Activities/Activities";
+import ActivityCreate from "@/pages/ActivityCreate/ActivityCreate";
+import ActivityEdit from "@/pages/ActivityEdit/ActivityEdit";
+import Installations from "@/pages/Installations/Installations";
+import InstallationCreate from "@/pages/InstallationCreate/InstallationCreate";
+import InstallationEdit from "@/pages/InstallationEdit/InstallationEdit";
+import Users from "@/pages/Users/Users";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -47,10 +47,6 @@ function App() {
           {/* PUBLIC ROUTES */}
           <Route element={<NoRequireAuth />}>
             <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
-            <Route
-              path={PUBLIC_ROUTES.UNAUTHORIZED}
-              element={<Unauthorized />}
-            />
           </Route>
 
           {/* PRIVATE ROUTES */}
@@ -96,6 +92,10 @@ function App() {
                 path={`${PRIVATE_ROUTES.INSTALLATIONS_EDIT}/:installationId`}
                 element={<InstallationEdit />}
               />
+            </Route>
+
+            <Route element={<RequireAuth allowedRoles={[Role.ADMIN]} />}>
+              <Route path={PRIVATE_ROUTES.USERS} element={<Users />} />
             </Route>
           </Route>
         </Routes>

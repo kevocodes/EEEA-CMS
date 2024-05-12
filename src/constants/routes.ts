@@ -17,6 +17,10 @@ export const PRIVATE_ROUTES = {
   INSTALLATIONS: "/instalaciones",
   INSTALLATIONS_CREATE: "/instalaciones/crear",
   INSTALLATIONS_EDIT: "/instalaciones/editar",
+
+  USERS: "/usuarios",
+  USERS_CREATE: "/usuarios/crear",
+  USERS_EDIT: "/usuarios/editar",
 };
 
 export const DEFAULT_REDIRECT = PRIVATE_ROUTES.HOME;

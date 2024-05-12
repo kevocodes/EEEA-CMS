@@ -1,9 +1,9 @@
-import { Activity } from "@/models/activities.mode";
+import { Activity } from "@/models/activities.model";
 import dayjs from "dayjs";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-interface activitesState {
+interface activitiesState {
   activities: Activity[];
   yearFilter: string;
   setActivities: (activities: Activity[]) => void;
@@ -11,7 +11,7 @@ interface activitesState {
   setYearFilter: (year: string) => void;
 }
 
-export const useActivities = create<activitesState>()(
+export const useActivities = create<activitiesState>()(
   devtools((set) => ({
     activities: [],
     setActivities: (activities) => set({ activities }),
