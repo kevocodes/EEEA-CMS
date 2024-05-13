@@ -27,6 +27,7 @@ interface ProfileEditFormProps {
 
 function ProfileEditForm({ user }: ProfileEditFormProps) {
   const token = useAuth((state) => state.token);
+  const updateUserInformation = useAuth((state) => state.updateUserInformation);
 
   const form = useForm<z.infer<typeof updateProfileSchema>>({
     resolver: zodResolver(updateProfileSchema),
@@ -42,8 +43,9 @@ function ProfileEditForm({ user }: ProfileEditFormProps) {
     try {
       if (!values.password) delete values.password;
 
-      const respose = await updateProfile(user.id, values, token!);
-      toast.success(respose);
+      const response = await updateProfile(user.id, values, token!);
+      updateUserInformation(values.name, values.lastname);
+      toast.success(response);
     } catch (error) {
       if (error instanceof ResponseError) {
         if (error.status === 409) {
@@ -127,7 +129,7 @@ function ProfileEditForm({ user }: ProfileEditFormProps) {
             {form.formState.isSubmitting && (
               <LoaderCircle size={16} className="animate-spin mr-2" />
             )}
-            Actualizar Usuario
+            Actualizar Perfil
           </Button>
         </div>
       </form>

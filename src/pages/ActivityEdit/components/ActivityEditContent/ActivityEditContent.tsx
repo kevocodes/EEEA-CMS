@@ -4,7 +4,7 @@ import { ResponseError } from "@/models/responseError.model";
 import { useParams } from "react-router-dom";
 import { ActivityDetail } from "@/models/activities.model";
 import { getActivityById } from "@/services/activities.service";
-import ActivityEditInformationForm from "./ActivityEditInformationForm/ActivityEditInformationForm";
+import ActivityEditInformationForm from "./components/ActivityEditInformationForm/ActivityEditInformationForm";
 
 type ActivityEditParams = {
   activityId: string;

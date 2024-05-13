@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/platform/PageContainer/PageContainer";
-import EventEditContent from "./ActivityEditContent/ActivityEditContent";
+import EventEditContent from "./components/ActivityEditContent/ActivityEditContent";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";

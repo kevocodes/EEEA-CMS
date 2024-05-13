@@ -3,7 +3,7 @@ import { PRIVATE_ROUTES } from "@/constants/routes";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import InstallationEditContent from "./InstallationEditContent/InstallationEditContent";
+import InstallationEditContent from "./components/InstallationEditContent/InstallationEditContent";
 
 function InstallationEdit() {
   return (

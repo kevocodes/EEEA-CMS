@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "@/stores/auth.store";
 import { UserDBDetail } from "@/models/user.model";
 import { getUserById } from "@/services/users.service";
-import UserEditContentForm from "./UserEditContentForm/UserEditContentForm";
+import UserEditContentForm from "./components/UserEditContentForm/UserEditContentForm";
 
 type UserEditParams = {
   userId: string;

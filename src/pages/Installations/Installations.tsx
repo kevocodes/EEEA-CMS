@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/platform/PageContainer/PageContainer";
-import InstallationImages from "./InstallationImages/InstallationImages";
+import InstallationImages from "./components/InstallationImages/InstallationImages";
 import { useInstallations } from "@/stores/installations.store";
 import { useEffect, useState } from "react";
 import { ResponseError } from "@/models/responseError.model";

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { PRIVATE_ROUTES } from "@/constants/routes"
 import { ArrowLeft } from "lucide-react"
 import { Link } from "react-router-dom"
-import UserEditContent from "./UserEditContent/UserEditContent"
+import UserEditContent from "./components/UserEditContent/UserEditContent"
 
 function UserEdit() {
   return (

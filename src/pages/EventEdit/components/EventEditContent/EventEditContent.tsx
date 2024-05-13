@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import EventEditInformationForm from "./EventEditInformationForm/EventEditInformationForm";
+import EventEditInformationForm from "./components/EventEditInformationForm/EventEditInformationForm";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getEventById } from "@/services/events.service";
@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "@/stores/auth.store";
 import { EventDetail } from "@/models/events.model";
 import { urlToFile } from "@/utils/createImageFileFromUrl";
-import EventEditImages from "./EventEditImages/EventEditImages";
+import EventEditImages from "./components/EventEditImages/EventEditImages";
 
 type EventEditParams = {
   eventId: string;
