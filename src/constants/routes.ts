@@ -21,6 +21,8 @@ export const PRIVATE_ROUTES = {
   USERS: "/usuarios",
   USERS_CREATE: "/usuarios/crear",
   USERS_EDIT: "/usuarios/editar",
+
+  PROFILE: "/perfil",
 };
 
 export const DEFAULT_REDIRECT = PRIVATE_ROUTES.HOME;

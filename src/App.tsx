@@ -22,6 +22,7 @@ import InstallationEdit from "@/pages/InstallationEdit/InstallationEdit";
 import Users from "@/pages/Users/Users";
 import UserCreate from "@/pages/UsersCreate/UserCreate";
 import UserEdit from "@/pages/UserEdit/UserEdit";
+import Profile from "@/pages/Profile/Profile";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -93,6 +94,10 @@ function App() {
               <Route
                 path={`${PRIVATE_ROUTES.INSTALLATIONS_EDIT}/:installationId`}
                 element={<InstallationEdit />}
+              />
+              <Route
+                path={PRIVATE_ROUTES.PROFILE}
+                element={<Profile />}
               />
             </Route>
 

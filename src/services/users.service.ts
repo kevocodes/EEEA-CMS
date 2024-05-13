@@ -1,6 +1,10 @@
 import { ResponseError } from "@/models/responseError.model";
 import { UserDB, UserDBDetail } from "@/models/user.model";
-import { createUserSchema, updateUserSchema } from "@/schemas/users.schema";
+import {
+  createUserSchema,
+  updateProfileSchema,
+  updateUserSchema,
+} from "@/schemas/users.schema";
 import { z } from "zod";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -88,13 +92,48 @@ export const updateUser = async (
     }
 
     if (response.status === 409) {
-      throw new ResponseError("Correo electrónico se encuentra en uso", response.status);
+      throw new ResponseError(
+        "Correo electrónico se encuentra en uso",
+        response.status
+      );
     }
 
     throw new ResponseError("Ups...Algo salió mal", response.status);
   }
 
   return "Usuario actualizado con éxito";
+};
+
+export const updateProfile = async (
+  userId: string,
+  values: z.infer<typeof updateProfileSchema>,
+  token: string
+): Promise<string> => {
+  const response = await fetch(`${BASE_URL}/users/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(values),
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new ResponseError("Usuario no encontrado", response.status);
+    }
+
+    if (response.status === 409) {
+      throw new ResponseError(
+        "Correo electrónico se encuentra en uso",
+        response.status
+      );
+    }
+
+    throw new ResponseError("Ups...Algo salió mal", response.status);
+  }
+
+  return "Perfil actualizado con éxito";
 };
 
 export const deleteUser = async (
