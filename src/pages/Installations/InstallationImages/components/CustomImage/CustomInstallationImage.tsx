@@ -22,7 +22,7 @@ function CustomInstallationImage({
         variant="secondary"
         className="hidden group-hover:block absolute bottom-2 right-2 ml-2"
       >
-        {caption}
+        {caption || "Imagen de instalación"}
       </Badge>
     </div>
   );
