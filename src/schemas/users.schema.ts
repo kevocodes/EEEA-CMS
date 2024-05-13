@@ -1,10 +1,17 @@
 import { Role } from "@/models/user.model";
 import { z } from "zod";
 
+// Expresión regular que permite caracteres alfanuméricos sin espacios
+const noWhiteSpace = /^[^\s]+$/;
+
 export const createUserSchema = z
   .object({
-    name: z.string().min(1, "Nombre requerido"),
-    lastname: z.string().min(1, "Apellido requerido"),
+    name: z.string().min(1, "Nombre requerido").regex(noWhiteSpace, {
+      message: "Nombre no debe contener espacios en blanco",
+    }),
+    lastname: z.string().min(1, "Apellido requerido").regex(noWhiteSpace, {
+      message: "Apellido no debe contener espacios en blanco",
+    }),
     email: z.string().email("Correo electrónico inválido"),
     role: z.enum([Role.ADMIN, Role.CONTENT_MANAGER], {
       message: "Rol inválido",
@@ -66,10 +73,14 @@ export const createUserSchema = z
     }
   });
 
-  export const updateUserSchema = z
+export const updateUserSchema = z
   .object({
-    name: z.string().min(1, "Nombre requerido"),
-    lastname: z.string().min(1, "Apellido requerido"),
+    name: z.string().min(1, "Nombre requerido").regex(noWhiteSpace, {
+      message: "Nombre no debe contener espacios en blanco",
+    }),
+    lastname: z.string().min(1, "Apellido requerido").regex(noWhiteSpace, {
+      message: "Apellido no debe contener espacios en blanco",
+    }),
     email: z.string().email("Correo electrónico inválido"),
     role: z.enum([Role.ADMIN, Role.CONTENT_MANAGER], {
       message: "Rol inválido",
@@ -133,10 +144,14 @@ export const createUserSchema = z
     }
   });
 
-  export const updateProfileSchema = z
+export const updateProfileSchema = z
   .object({
-    name: z.string().min(1, "Nombre requerido"),
-    lastname: z.string().min(1, "Apellido requerido"),
+    name: z.string().min(1, "Nombre requerido").regex(noWhiteSpace, {
+      message: "Nombre no debe contener espacios en blanco",
+    }),
+    lastname: z.string().min(1, "Apellido requerido").regex(noWhiteSpace, {
+      message: "Apellido no debe contener espacios en blanco",
+    }),
     email: z.string().email("Correo electrónico inválido"),
     password: z.string().optional(),
   })
