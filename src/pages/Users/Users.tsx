@@ -11,8 +11,12 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import UsersTable from "./components/UsersTable/UsersTable";
 import { usersColumns } from "./components/UsersTable/constants/columns";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 
 function Users() {
+  useTitle(getTitles(PRIVATE_ROUTES.USERS));
+
   const users = useUsers((state) => state.users);
   const setUsers = useUsers((state) => state.setUsers);
   const token = useAuth((state) => state.token);

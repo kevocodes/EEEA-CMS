@@ -4,8 +4,12 @@ import { PRIVATE_ROUTES } from "@/constants/routes";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import UserCreateForm from "./components/UserCreateForm/UserCreateForm";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 
 function UserCreate() {
+  useTitle(getTitles(PRIVATE_ROUTES.USERS_CREATE));
+
   return (
     <PageContainer>
       <div className="flex items-center w-full gap-3">

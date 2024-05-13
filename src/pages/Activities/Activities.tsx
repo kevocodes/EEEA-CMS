@@ -10,8 +10,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { PRIVATE_ROUTES } from "@/constants/routes";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 
 function Activities() {
+  useTitle(getTitles(PRIVATE_ROUTES.ACTIVITIES));
+
   const activities = useActivities((state) => state.activities);
   const setActivities = useActivities((state) => state.setActivities);
   const yearFilter = useActivities((state) => state.yearFilter);

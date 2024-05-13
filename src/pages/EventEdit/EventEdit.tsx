@@ -4,8 +4,12 @@ import { PRIVATE_ROUTES } from "@/constants/routes";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 
 function EventEdit() {
+  useTitle(getTitles(PRIVATE_ROUTES.EVENTS_EDIT));
+
   return (
     <PageContainer>
       <div className="flex items-center w-full gap-3">

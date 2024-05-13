@@ -6,8 +6,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import LoginForm from "./components/LoginForm";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
+import { PUBLIC_ROUTES } from "@/constants/routes";
 
 function Login() {
+  useTitle(getTitles(PUBLIC_ROUTES.LOGIN));
+
   return (
     <main className="min-h-[100dvh] grid place-items-center">
       <Card className="w-full max-w-xl border-none shadow-none">

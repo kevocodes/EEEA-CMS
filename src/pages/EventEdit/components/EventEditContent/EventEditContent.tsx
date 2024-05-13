@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { getEventById } from "@/services/events.service";
 import { ResponseError } from "@/models/responseError.model";
 import { useParams } from "react-router-dom";
-import { useAuth } from "@/stores/auth.store";
 import { EventDetail } from "@/models/events.model";
 import { urlToFile } from "@/utils/createImageFileFromUrl";
 import EventEditImages from "./components/EventEditImages/EventEditImages";

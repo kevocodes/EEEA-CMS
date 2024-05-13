@@ -9,9 +9,13 @@ import { useEvents } from "@/stores/events.store";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 
-function Events() {
+function Events() { 
+  useTitle(getTitles(PRIVATE_ROUTES.EVENTS));
+
   const events = useEvents((state) => state.events);
   const setEvents = useEvents((state) => state.setEvents);
   const yearFilter = useEvents((state) => state.yearFilter);

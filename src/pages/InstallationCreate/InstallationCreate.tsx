@@ -4,8 +4,12 @@ import { PRIVATE_ROUTES } from "@/constants/routes";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import InstallationCreateForm from "./components/InstallationCreateForm/InstallationCreateForm";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
 
 function InstallationCreate() {
+  useTitle(getTitles(PRIVATE_ROUTES.INSTALLATIONS_CREATE));
+
   return (
     <PageContainer>
       <div className="flex items-center w-full gap-3">

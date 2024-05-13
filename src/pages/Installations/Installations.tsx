@@ -5,8 +5,13 @@ import { useEffect, useState } from "react";
 import { ResponseError } from "@/models/responseError.model";
 import { toast } from "sonner";
 import { getInstallations } from "@/services/installations.service";
+import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
+import { PRIVATE_ROUTES } from "@/constants/routes";
 
 function Installations() {
+  useTitle(getTitles(PRIVATE_ROUTES.INSTALLATIONS));
+
   const installations = useInstallations((state) => state.installations);
   const setInstallations = useInstallations((state) => state.setInstallations);
 
