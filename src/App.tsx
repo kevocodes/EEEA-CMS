@@ -1,5 +1,9 @@
 import { Toaster } from "@/components/ui/sonner";
-import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
+import {
+  DEFAULT_REDIRECT,
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+} from "@/constants/routes";
 import RequireAuth from "@/guards/privateRoute.guard";
 import NoRequireAuth from "@/guards/publicRoute.guard";
 import AppLayout from "@/layouts/AppLayout";
@@ -10,7 +14,12 @@ import { validateSession } from "@/services/auth.service";
 import { useAuth } from "@/stores/auth.store";
 import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponseUser.util";
 import { useEffect } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import EventCreate from "@/pages/EventCreate/EventCreate";
 import EventEdit from "@/pages/EventEdit/EventEdit";
 import Activities from "@/pages/Activities/Activities";
@@ -95,10 +104,7 @@ function App() {
                 path={`${PRIVATE_ROUTES.INSTALLATIONS_EDIT}/:installationId`}
                 element={<InstallationEdit />}
               />
-              <Route
-                path={PRIVATE_ROUTES.PROFILE}
-                element={<Profile />}
-              />
+              <Route path={PRIVATE_ROUTES.PROFILE} element={<Profile />} />
             </Route>
 
             <Route element={<RequireAuth allowedRoles={[Role.ADMIN]} />}>
@@ -113,6 +119,9 @@ function App() {
               />
             </Route>
           </Route>
+
+          {/* 404 */}
+          <Route path="*" element={<Navigate to={DEFAULT_REDIRECT} />} />
         </Routes>
       </Router>
       <Toaster />
