@@ -6,14 +6,7 @@ export interface Activity {
   isAllDay: boolean;
   createdAt: string;
   updatedAt: string;
-  creator: Creator;
-}
-
-export interface Creator {
-  id: string;
-  name: string;
-  lastname: string;
-  email: string;
+  creator: string;
 }
 
 export interface ActivityDetail extends Activity {}

@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Creator, Event } from "@/models/events.model";
+import { Event } from "@/models/events.model";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import EventThumbnailViewer from "../components/EventThumbnailViewer";
@@ -71,11 +71,6 @@ export const eventsColumns: ColumnDef<Event>[] = [
   {
     accessorKey: "creator",
     header: "Creador",
-    cell: ({ row }) => {
-      const creator = row.getValue("creator") as Creator;
-
-      return <div>{`${creator.name} ${creator.lastname}`}</div>;
-    },
   },
   {
     id: "actions",

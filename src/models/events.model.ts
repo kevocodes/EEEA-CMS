@@ -7,7 +7,7 @@ export interface Event {
   thumbnail: string;
   public_id: string;
   creatorId: string;
-  creator: Creator;
+  creator: string;
   createdAt: string;
   updatedAt: string;
   images: EventImage[];
@@ -21,10 +21,3 @@ export interface EventImage {
 }
 
 export interface EventDetail extends Event {}
-
-export interface Creator {
-  id: string;
-  name: string;
-  lastname: string;
-  email: string;
-}

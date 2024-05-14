@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Activity, Creator } from "@/models/activities.model";
+import { Activity } from "@/models/activities.model";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { ArrowDown, ArrowUp } from "lucide-react";
@@ -44,11 +44,6 @@ export const activitiesColumns: ColumnDef<Activity>[] = [
   {
     accessorKey: "creator",
     header: "Creador",
-    cell: ({ row }) => {
-      const creator = row.getValue("creator") as Creator;
-
-      return <div>{`${creator.name} ${creator.lastname}`}</div>;
-    },
   },
   {
     id: "actions",
