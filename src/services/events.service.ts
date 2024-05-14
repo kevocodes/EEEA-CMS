@@ -143,6 +143,10 @@ export const deleteEvent = async (
       throw new ResponseError("Evento no encontrado", response.status);
     }
 
+    if (response.status === 409) {
+      throw new ResponseError("No se puede eliminar un evento con imágenes, elimina las imágenes primero", response.status);
+    }
+
     throw new ResponseError("Ups...Algo salió mal", response.status);
   }
 
