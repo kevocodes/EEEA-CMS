@@ -1,3 +1,4 @@
+import { MAX_IMAGE_MB_SIZE } from "@/constants/images";
 import { sizeInMB } from "@/utils/file-size-converter";
 import * as z from "zod";
 
@@ -7,8 +8,6 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
 ];
-
-export const MAX_IMAGE_MB_SIZE = 1.5;
 
 export const createInstallationSchema = z.object({
   name: z.string().min(1, "Nombre requerido"),

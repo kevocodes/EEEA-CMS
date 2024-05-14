@@ -3,12 +3,10 @@ import DropzoneContainer from "react-dropzone";
 import { toast } from "sonner";
 import EventImageDropzoneContent from "./AddEventImagesDropzoneContent";
 import { useForm } from "react-hook-form";
-import {
-  MAX_IMAGE_MB_SIZE,
-  addEventImageSchema,
-} from "@/schemas/events.schema";
+import { addEventImageSchema } from "@/schemas/events.schema";
 import { cn } from "@/lib/utils";
 import { sizeInBytes } from "@/utils/file-size-converter";
+import { MAX_IMAGE_MB_SIZE } from "@/constants/images";
 
 interface DropzoneProps {
   form: ReturnType<typeof useForm<z.infer<typeof addEventImageSchema>>>;
@@ -88,7 +86,10 @@ export default function AddEventImagesDropzone({ form }: DropzoneProps) {
                 Las siguientes imágenes no pueden ser agregadas:
               </p>
               {fileRejections.map((file) => (
-                <p className="text-sm font-normal leading-none text-muted-foreground" key={crypto.randomUUID()}>
+                <p
+                  className="text-sm font-normal leading-none text-muted-foreground"
+                  key={crypto.randomUUID()}
+                >
                   * {file.file.name}
                 </p>
               ))}
