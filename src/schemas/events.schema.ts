@@ -12,11 +12,7 @@ const ACCEPTED_IMAGE_TYPES = [
 export const createEventSchema = z.object({
   title: z.string().min(1, "Título requerido"),
   location: z.string().min(1, "Ubicación requerida"),
-  datetime: z
-    .date({ message: "Fecha requerida" })
-    .refine((value) => value > new Date(), {
-      message: "La fecha debe ser mayor a la actual",
-    }),
+  datetime: z.date({ message: "Fecha requerida" }),
   thumbnail: z
     .custom<File[]>()
     .refine((files) => {
@@ -37,11 +33,7 @@ export const createEventSchema = z.object({
 export const editEventSchema = z.object({
   title: z.string().min(1, "Título requerido"),
   location: z.string().min(1, "Ubicación requerida"),
-  datetime: z
-    .date({ message: "Fecha requerida" })
-    .refine((value) => value > new Date(), {
-      message: "La fecha debe ser mayor a la actual",
-    }),
+  datetime: z.date({ message: "Fecha requerida" }),
   status: z.enum(["completed", "pending"], {
     required_error: "Estado requerido",
   }),
