@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
+import { PasswordInput } from "./PasswordInput";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ function LoginForm() {
             <FormItem>
               <FormLabel>Contraseña</FormLabel>
               <FormControl>
-                <Input placeholder="********" {...field} type="password" />
+                <PasswordInput placeholder="********" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
