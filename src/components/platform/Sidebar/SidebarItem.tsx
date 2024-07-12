@@ -40,7 +40,7 @@ export const SidebarItem = ({
     <Link
       to={to}
       className={cn(
-        "px-3 py-3 relative rounded-md flex gap-3 items-center w-full",
+        "px-3 py-3 relative rounded-md flex gap-3 items-center w-full overflow-hidden",
         isActive && "bg-primary text-primary-foreground",
         !isActive && "hover:bg-muted"
       )}
@@ -48,7 +48,7 @@ export const SidebarItem = ({
       {children}
 
       <motion.p
-        className="absolute left-12"
+        className="absolute left-12 truncate"
         animate={isSidebarOpen ? "open" : "closed"}
         variants={variants}
       >
