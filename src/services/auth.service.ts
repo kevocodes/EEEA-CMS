@@ -30,9 +30,7 @@ export const signIn = async (
   return data;
 };
 
-export const validateSession = async (
-  token: string
-): Promise<UserDB> => {
+export const validateSession = async (token: string): Promise<UserDB> => {
   const response = await fetch(`${BASE_URL}/auth/profile`, {
     method: "GET",
     headers: {
@@ -47,4 +45,55 @@ export const validateSession = async (
   const { data } = await response.json();
 
   return data;
+};
+
+export const sendEmailVerification = async (token: string): Promise<string> => {
+  const response = await fetch(`${BASE_URL}/auth/send-verification-email`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    if (response.status === 409) {
+      const body = await response.json();
+      const expiresAt = body.message.split(": ")[1] as string;
+
+      throw new ResponseError(expiresAt, response.status);
+    }
+
+    throw new ResponseError(
+      "Error al enviar el correo de verificación",
+      response.status
+    );
+  }
+
+  const { data } = await response.json();
+  const { expiresAt } = data;
+  return expiresAt;
+};
+
+export const verifyEmail = async (
+  otp: string,
+  token: string
+) => {
+  const response = await fetch(`${BASE_URL}/auth/verify-email`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ otp }),
+  });
+
+  if (!response.ok) {
+    if (response.status === 400) {
+      throw new ResponseError("Código de verificación incorrecto", response.status);
+    }
+
+    throw new ResponseError("Error al verificar el correo", response.status);
+  }
+
+  return "Correo verificado con éxito";
 };

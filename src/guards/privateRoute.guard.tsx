@@ -1,4 +1,8 @@
-import { DEFAULT_REDIRECT, PUBLIC_ROUTES } from "@/constants/routes";
+import {
+  DEFAULT_REDIRECT,
+  PRIVATE_ROUTES,
+  PUBLIC_ROUTES,
+} from "@/constants/routes";
 import { Role } from "@/models/user.model";
 import { useAuth } from "@/stores/auth.store";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
@@ -15,6 +19,10 @@ function RequireAuth({ allowedRoles }: RequireAuthProps) {
     return (
       <Navigate to={PUBLIC_ROUTES.LOGIN} state={{ from: location }} replace />
     );
+  }
+
+  if (!user.emailVerified) {
+    return <Navigate to={PRIVATE_ROUTES.VERIFY_EMAIL} replace />;
   }
 
   if (!allowedRoles.includes(user.role)) {

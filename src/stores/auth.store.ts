@@ -8,6 +8,7 @@ interface authState {
   setToken: (token: string) => void;
   setUser: (user: User) => void;
   updateUserInformation: (name: string, lastname: string) => void;
+  updateVerificationStatus: (status: boolean) => void;
   logout: () => void;
 }
 
@@ -28,6 +29,14 @@ export const useAuth = create<authState>()(
               lastname,
             },
           })),
+        updateVerificationStatus: (status) => {
+          set((state) => ({
+            user: {
+              ...state.user!,
+              emailVerified: status,
+            },
+          }));
+        },
       }),
       { name: "auth-storage" }
     )

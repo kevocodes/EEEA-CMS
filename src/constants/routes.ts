@@ -21,6 +21,7 @@ export enum PRIVATE_ROUTES {
   USERS_CREATE = "/usuarios/crear",
   USERS_EDIT = "/usuarios/editar",
 
+  VERIFY_EMAIL = "/verificar-correo",
   PROFILE = "/perfil",
 }
 

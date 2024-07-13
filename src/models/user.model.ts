@@ -3,6 +3,7 @@ export interface User {
   name: string;
   role: Role;
   lastname: string;
+  emailVerified: boolean;
 }
 
 export interface UserDB {
@@ -13,6 +14,7 @@ export interface UserDB {
   role: Role;
   createdAt: string;
   updatedAt: string;
+  emailVerified: boolean;
 }
 
 export interface UserDBDetail extends UserDB {}

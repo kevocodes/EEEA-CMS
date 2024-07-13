@@ -32,6 +32,8 @@ import Users from "@/pages/Users/Users";
 import UserCreate from "@/pages/UsersCreate/UserCreate";
 import UserEdit from "@/pages/UserEdit/UserEdit";
 import Profile from "@/pages/Profile/Profile";
+import VerfiyEmail from "@/pages/VerifyEmail/VerfiyEmail";
+import RequireUnverifiedUser from "./guards/unverifiedUser.guard";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -118,6 +120,14 @@ function App() {
                 element={<UserEdit />}
               />
             </Route>
+          </Route>
+
+          {/* VERIFICATIONS */}
+          <Route element={<RequireUnverifiedUser />}>
+            <Route
+              path={PRIVATE_ROUTES.VERIFY_EMAIL}
+              element={<VerfiyEmail />}
+            />
           </Route>
 
           {/* 404 */}

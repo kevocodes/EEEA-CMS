@@ -6,5 +6,6 @@ export const createAppUserFromResponseUser = (responseUser: UserDB): User => {
     lastname: responseUser.lastname,
     name: responseUser.name,
     role: responseUser.role,
+    emailVerified: responseUser.emailVerified,
   };
 };
