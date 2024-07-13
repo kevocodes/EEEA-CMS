@@ -30,6 +30,7 @@ function ActivityCreateForm() {
     resolver: zodResolver(createActivitySchema),
     defaultValues: {
       title: "",
+      isAllDay: false,
     },
   });
 
@@ -47,6 +48,7 @@ function ActivityCreateForm() {
 
   return (
     <Form {...form}>
+      {JSON.stringify(form.watch(), null, 2)}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 bg-background w-full p-8 rounded-lg"
