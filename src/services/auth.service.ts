@@ -74,10 +74,7 @@ export const sendEmailVerification = async (token: string): Promise<string> => {
   return expiresAt;
 };
 
-export const verifyEmail = async (
-  otp: string,
-  token: string
-) => {
+export const verifyEmail = async (otp: string, token: string) => {
   const response = await fetch(`${BASE_URL}/auth/verify-email`, {
     method: "POST",
     headers: {
@@ -89,7 +86,10 @@ export const verifyEmail = async (
 
   if (!response.ok) {
     if (response.status === 400) {
-      throw new ResponseError("Código de verificación incorrecto", response.status);
+      throw new ResponseError(
+        "Código de verificación incorrecto",
+        response.status
+      );
     }
 
     throw new ResponseError("Error al verificar el correo", response.status);
@@ -97,7 +97,6 @@ export const verifyEmail = async (
 
   return "Correo verificado con éxito";
 };
-
 
 export const forgotPassword = async (email: string) => {
   const response = await fetch(`${BASE_URL}/auth/forgot-password`, {
@@ -113,8 +112,49 @@ export const forgotPassword = async (email: string) => {
       throw new ResponseError("Correo no encontrado", response.status);
     }
 
-    throw new ResponseError("Error al solicitar el cambio de contraseña", response.status);
+    throw new ResponseError(
+      "Error al solicitar el cambio de contraseña",
+      response.status
+    );
   }
 
   return "Correo enviado con éxito";
+};
+
+export const verifyForgotPasswordToken = async (token: string) => {
+  const response = await fetch(
+    `${BASE_URL}/auth/verify-forgot-password-token/${token}`,
+    {
+      method: "GET",
+    }
+  );
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new ResponseError("Token no encontrado", response.status);
+    }
+
+    throw new ResponseError("Error al verificar el token", response.status);
+  }
+
+  return "Token verificado con éxito";
+};
+
+export const resetPassword = async (token: string, password: string) => {
+  const response = await fetch(`${BASE_URL}/auth/reset-password/${token}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password }),
+  });
+
+  if (!response.ok) {
+    throw new ResponseError(
+      "Error al restablecer la contraseña, intentelo nuevamente más tarde",
+      response.status
+    );
+  }
+
+  return "Contraseña restablecida con éxito";
 };

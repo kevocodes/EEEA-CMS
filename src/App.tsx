@@ -35,6 +35,7 @@ import Profile from "@/pages/Profile/Profile";
 import VerfiyEmail from "@/pages/VerifyEmail/VerifyEmail";
 import RequireUnverifiedUser from "@/guards/unverifiedUser.guard";
 import ForgotPasword from "@/pages/ForgotPassword/ForgotPasword";
+import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -65,6 +66,10 @@ function App() {
             <Route
               path={PUBLIC_ROUTES.FORGOT_PASSWORD}
               element={<ForgotPasword />}
+            />
+            <Route
+              path={`${PUBLIC_ROUTES.RESET_PASSWORD}/:token`}
+              element={<ResetPassword />}
             />
           </Route>
 
