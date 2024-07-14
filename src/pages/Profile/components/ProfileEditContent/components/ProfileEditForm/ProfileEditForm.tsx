@@ -28,6 +28,9 @@ interface ProfileEditFormProps {
 function ProfileEditForm({ user }: ProfileEditFormProps) {
   const token = useAuth((state) => state.token);
   const updateUserInformation = useAuth((state) => state.updateUserInformation);
+  const updateVerificationStatus = useAuth(
+    (state) => state.updateVerificationStatus
+  );
 
   const form = useForm<z.infer<typeof updateProfileSchema>>({
     resolver: zodResolver(updateProfileSchema),
@@ -41,11 +44,18 @@ function ProfileEditForm({ user }: ProfileEditFormProps) {
 
   const onSubmit = async (values: z.infer<typeof updateProfileSchema>) => {
     try {
+      const currentEmail = user.email;
+
       if (!values.password) delete values.password;
 
       const response = await updateProfile(user.id, values, token!);
       updateUserInformation(values.name, values.lastname);
       toast.success(response);
+
+      // If the email has changed, we need to re-verify it
+      if (currentEmail !== values.email) {
+        updateVerificationStatus(false);
+      }
     } catch (error) {
       if (error instanceof ResponseError) {
         if (error.status === 409) {

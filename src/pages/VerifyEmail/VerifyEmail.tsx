@@ -28,7 +28,7 @@ import { OtpSchema } from "@/schemas/otp.schema";
 import { useNavigate } from "react-router-dom";
 import { DEFAULT_REDIRECT } from "@/constants/routes";
 
-function VerfiyEmail() {
+function VerifyEmail() {
   const form = useForm<z.infer<typeof OtpSchema>>({
     resolver: zodResolver(OtpSchema),
     defaultValues: {
@@ -112,13 +112,19 @@ function VerfiyEmail() {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-fit sm:w-full max-w-[300px] sm:max-w-sm flex flex-col gap-2"
         >
+          {!loading && (
+            <div className="flex flex-col justify-center items-center">
+              <img src="/logo.webp" alt="Logo" className="w-20 h-20" />
+            </div> 
+          )}
+
           {!loading && !error && (
             <FormField
               control={form.control}
               name="pin"
               render={({ field }) => (
                 <FormItem className="flex flex-col items-center">
-                  <FormLabel className="text-xl">
+                  <FormLabel className="text-xl text-center text-balance">
                     Verificación de correo electrónico
                   </FormLabel>
                   <FormDescription className="text-balance text-center">
@@ -218,4 +224,4 @@ function VerfiyEmail() {
   );
 }
 
-export default VerfiyEmail;
+export default VerifyEmail;

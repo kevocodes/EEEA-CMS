@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PRIVATE_ROUTES } from "@/constants/routes";
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
 import { ResponseError } from "@/models/responseError.model";
 import { loginSchema } from "@/schemas/login.schema";
 import { signIn } from "@/services/auth.service";
@@ -17,7 +17,7 @@ import { createAppUserFromResponseUser } from "@/utils/createAppUserFromResponse
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 import { PasswordInput } from "./PasswordInput";
@@ -50,7 +50,10 @@ function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-5"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -78,6 +81,13 @@ function LoginForm() {
             </FormItem>
           )}
         />
+
+        <Link
+          to={PUBLIC_ROUTES.FORGOT_PASSWORD}
+          className="text-primary text-sm font-medium"
+        >
+          ¿Olvidaste tu contraseña?
+        </Link>
 
         <Button type="submit" className="w-full">
           {form.formState.isSubmitting && (

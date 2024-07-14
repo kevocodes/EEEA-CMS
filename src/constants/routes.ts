@@ -1,5 +1,7 @@
 export enum PUBLIC_ROUTES {
   LOGIN = "/inicio-sesion",
+  FORGOT_PASSWORD = "/recuperar-contrasena",
+  RESET_PASSWORD = "/restablecer-contrasena",
 }
 
 export enum PRIVATE_ROUTES {

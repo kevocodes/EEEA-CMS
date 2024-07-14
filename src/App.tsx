@@ -32,8 +32,9 @@ import Users from "@/pages/Users/Users";
 import UserCreate from "@/pages/UsersCreate/UserCreate";
 import UserEdit from "@/pages/UserEdit/UserEdit";
 import Profile from "@/pages/Profile/Profile";
-import VerfiyEmail from "@/pages/VerifyEmail/VerfiyEmail";
-import RequireUnverifiedUser from "./guards/unverifiedUser.guard";
+import VerfiyEmail from "@/pages/VerifyEmail/VerifyEmail";
+import RequireUnverifiedUser from "@/guards/unverifiedUser.guard";
+import ForgotPasword from "@/pages/ForgotPassword/ForgotPasword";
 
 function App() {
   const token = useAuth((state) => state.token);
@@ -61,6 +62,10 @@ function App() {
           {/* PUBLIC ROUTES */}
           <Route element={<NoRequireAuth />}>
             <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
+            <Route
+              path={PUBLIC_ROUTES.FORGOT_PASSWORD}
+              element={<ForgotPasword />}
+            />
           </Route>
 
           {/* PRIVATE ROUTES */}

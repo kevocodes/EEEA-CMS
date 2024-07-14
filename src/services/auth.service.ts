@@ -97,3 +97,24 @@ export const verifyEmail = async (
 
   return "Correo verificado con éxito";
 };
+
+
+export const forgotPassword = async (email: string) => {
+  const response = await fetch(`${BASE_URL}/auth/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new ResponseError("Correo no encontrado", response.status);
+    }
+
+    throw new ResponseError("Error al solicitar el cambio de contraseña", response.status);
+  }
+
+  return "Correo enviado con éxito";
+};
