@@ -6,9 +6,11 @@ import { toast } from "sonner";
 import VerifyEmailForm from "./components/VerifyEmailForm";
 import VerifyEmailError from "./components/VerifyEmailError";
 import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
+import { PRIVATE_ROUTES } from "@/constants/routes";
 
 function VerifyEmail() {
-  useTitle("Verificar correo electrónico");
+  useTitle(getTitles(PRIVATE_ROUTES.VERIFY_EMAIL));
 
   const isMounted = useRef(false);
 

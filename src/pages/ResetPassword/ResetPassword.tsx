@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { verifyForgotPasswordToken } from "@/services/auth.service";
 import ResetPasswordError from "./components/ResetPasswordError/ResetPasswordError";
 import { useTitle } from "@/hooks/useTitle";
+import { getTitles } from "@/utils/getTitles";
+import { PUBLIC_ROUTES } from "@/constants/routes";
 
 function ResetPassword() {
-  useTitle("Recuperar contraseña");
+  useTitle(getTitles(PUBLIC_ROUTES.RESET_PASSWORD));
 
   const hasRendered = useRef(false);
 
@@ -35,7 +37,7 @@ function ResetPassword() {
 
   return (
     <main className="min-h-[100dvh] w-full flex justify-center items-center flex-col p-2">
-      {token && !error && <ResetPasswordForm token={token} loading={loading}/>}
+      {token && !error && <ResetPasswordForm token={token} loading={loading} />}
       {!loading && error && <ResetPasswordError />}
     </main>
   );
