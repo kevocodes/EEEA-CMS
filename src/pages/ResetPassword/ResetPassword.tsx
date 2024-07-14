@@ -3,8 +3,11 @@ import ResetPasswordForm from "./components/ResetPasswordForm/ResetPasswordForm"
 import { useEffect, useRef, useState } from "react";
 import { verifyForgotPasswordToken } from "@/services/auth.service";
 import ResetPasswordError from "./components/ResetPasswordError/ResetPasswordError";
+import { useTitle } from "@/hooks/useTitle";
 
 function ResetPassword() {
+  useTitle("Recuperar contraseña");
+
   const hasRendered = useRef(false);
 
   const { token } = useParams();

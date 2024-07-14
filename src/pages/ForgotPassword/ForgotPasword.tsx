@@ -1,8 +1,11 @@
 import { useState } from "react";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
 import ForgotPasswordConfirmation from "./components/ForgotPasswordConfirmation";
+import { useTitle } from "@/hooks/useTitle";
 
 function ForgotPasword() {
+  useTitle("Recuperar contraseña");
+
   const [sendEmail, setUsendEmail] = useState(false);
 
   return (

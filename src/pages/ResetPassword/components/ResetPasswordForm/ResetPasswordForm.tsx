@@ -53,15 +53,15 @@ function ResetPasswordForm({ token, loading }: ResetPasswordFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full max-w-sm flex flex-col gap-2"
       >
-        {!loading && (
-          <div className="flex flex-col justify-center items-center">
-            <img src="/logo.webp" alt="Logo" className="w-20 h-20" />
-          </div>
-        )}
-
         {loading && (
           <div className="w-full flex justify-center items-center text-primary flex-col gap-2">
             <Loader2 size={160} className="animate-spin" />
+          </div>
+        )}
+        
+        {!loading && (
+          <div className="flex flex-col justify-center items-center">
+            <img src="/logo.webp" alt="Logo" className="w-20 h-20" />
           </div>
         )}
 
