@@ -42,8 +42,7 @@ function ForgotPasswordForm({ setSendEmail }: ForgotPasswordFormProps) {
       setSendEmail(true);
     } catch (error) {
       if (error instanceof ResponseError) return toast.error(error.message);
-      if (error instanceof Error) return toast.error(error.message);
-      toast.error("Ocurrió un error inesperado");
+      toast.error("Ha ocurrido un error inesperado");
     }
   }
 

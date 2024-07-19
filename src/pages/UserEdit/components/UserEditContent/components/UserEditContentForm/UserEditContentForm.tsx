@@ -62,8 +62,10 @@ function UserEditContentForm({ user }: UserEditContentFormProps) {
           });
         }
 
-        toast.error(error.message);
+        return toast.error(error.message);
       }
+
+      toast.error("Ha ocurrido un error inesperado");
     }
   };
 
@@ -195,7 +197,7 @@ UserEditContentForm.skeleton = function UserEditContentFormSkeleton() {
       </div>
 
       <Skeleton className="w-full h-[68px] bg-muted rounded-lg" />
-      
+
       <div className="flex gap-2">
         <Skeleton className="w-full h-9 bg-muted rounded-lg" />
       </div>

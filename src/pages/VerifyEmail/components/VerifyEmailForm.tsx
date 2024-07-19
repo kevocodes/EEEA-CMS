@@ -69,7 +69,6 @@ function VerifyEmailForm({
       navigate(DEFAULT_REDIRECT);
     } catch (error) {
       if (error instanceof ResponseError) return toast.error(error.message);
-      if (error instanceof Error) return setError(error.message);
       setError("Error al verificar el correo");
     }
   }

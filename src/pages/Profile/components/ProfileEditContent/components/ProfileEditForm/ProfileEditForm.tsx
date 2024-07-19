@@ -65,9 +65,11 @@ function ProfileEditForm({ user }: ProfileEditFormProps) {
           });
         }
 
-        toast.error(error.message);
+        return toast.error(error.message);
       }
     }
+
+    toast.error("Ha ocurrido un error inesperado");
   };
 
   return (

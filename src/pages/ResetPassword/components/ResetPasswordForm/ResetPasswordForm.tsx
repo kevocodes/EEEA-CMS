@@ -42,7 +42,6 @@ function ResetPasswordForm({ token, loading }: ResetPasswordFormProps) {
       navigate(PUBLIC_ROUTES.LOGIN);
     } catch (error) {
       if (error instanceof ResponseError) return toast.error(error.message);
-      if (error instanceof Error) return toast.error(error.message);
       toast.error("Error al recuperar la contraseña");
     }
   };

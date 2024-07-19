@@ -29,9 +29,8 @@ function Activities() {
         const results = await getActivities(yearFilter);
         setActivities(results);
       } catch (error) {
-        if (error instanceof ResponseError) {
-          toast.error(error.message);
-        }
+        if (error instanceof ResponseError) return toast.error(error.message);
+        toast.error("Ha ocurrido un error inesperado");
       } finally {
         setLoading(false);
       }
@@ -48,10 +47,7 @@ function Activities() {
     <PageContainer>
       <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-3">
         <h2 className="text-xl font-bold">Actividades</h2>
-        <Link
-          to={PRIVATE_ROUTES.ACTIVITIES_CREATE}
-          className="w-full sm:w-fit"
-        >
+        <Link to={PRIVATE_ROUTES.ACTIVITIES_CREATE} className="w-full sm:w-fit">
           <Button className="w-full sm:w-fit">
             <Plus size={16} className="mr-2" />
             Crear actividad

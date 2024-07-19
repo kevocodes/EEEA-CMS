@@ -23,9 +23,8 @@ function EventEditContent() {
         const response = await getActivityById(activityId!);
         setActivity(response);
       } catch (error) {
-        if (error instanceof ResponseError) {
-          toast.error(error.message);
-        }
+        if (error instanceof ResponseError) return toast.error(error.message);
+        toast.error("Ha ocurrido un error inesperado");
       } finally {
         setLoading(false);
       }

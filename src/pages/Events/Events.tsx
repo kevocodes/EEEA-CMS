@@ -13,7 +13,7 @@ import { useTitle } from "@/hooks/useTitle";
 import { getTitles } from "@/utils/getTitles";
 import { PRIVATE_ROUTES } from "@/constants/routes";
 
-function Events() { 
+function Events() {
   useTitle(getTitles(PRIVATE_ROUTES.EVENTS));
 
   const events = useEvents((state) => state.events);
@@ -29,9 +29,8 @@ function Events() {
         const results = await getEvents(yearFilter);
         setEvents(results);
       } catch (error) {
-        if (error instanceof ResponseError) {
-          toast.error(error.message);
-        }
+        if (error instanceof ResponseError) return toast.error(error.message);
+        toast.error("Ha ocurrido un error inesperado");
       } finally {
         setLoading(false);
       }
