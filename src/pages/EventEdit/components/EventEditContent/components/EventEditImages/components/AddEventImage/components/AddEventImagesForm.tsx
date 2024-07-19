@@ -38,6 +38,8 @@ function AddEventImagesForm({
       if (error instanceof ResponseError) {
         toast.error(error.message);
       }
+
+      toast.error("Ha ocurrido un error inesperado");
     }
   };
 

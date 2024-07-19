@@ -30,9 +30,7 @@ export const getEvents = async (year: string = ""): Promise<Event[]> => {
   return data.events;
 };
 
-export const getEventById = async (
-  eventId: string,
-): Promise<EventDetail> => {
+export const getEventById = async (eventId: string): Promise<EventDetail> => {
   const response = await fetch(`${BASE_URL}/events/${eventId}`, {
     method: "GET",
   });
@@ -144,7 +142,10 @@ export const deleteEvent = async (
     }
 
     if (response.status === 409) {
-      throw new ResponseError("No se puede eliminar un evento con imágenes, elimina las imágenes primero", response.status);
+      throw new ResponseError(
+        "No se puede eliminar un evento con imágenes, elimina las imágenes primero",
+        response.status
+      );
     }
 
     throw new ResponseError("Ups...Algo salió mal", response.status);
@@ -194,21 +195,30 @@ export const addImagesToEvent = async (
   images: File[],
   token: string
 ): Promise<string> => {
-  const formData = new FormData();
-  images.forEach((image) => {
+  const fetches = images.map((image) => {
+    const formData = new FormData();
     formData.append("images", image);
+
+    return fetch(`${BASE_URL}/events/${eventId}/images`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
   });
 
-  const response = await fetch(`${BASE_URL}/events/${eventId}/images`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  });
+  const responses = await Promise.allSettled(fetches);
 
-  if (!response.ok) {
-    throw new ResponseError("Ups...Algo salió mal", response.status);
+  const errors = responses.filter((response) => response.status === "rejected");
+
+  console.log(errors);
+
+  if (errors.length > 0) {
+    throw new ResponseError(
+      "Ha ocurrido un error al añadir algunas imágenes",
+      500
+    );
   }
 
   return "Imágenes agregadas con éxito";
