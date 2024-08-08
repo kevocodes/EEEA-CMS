@@ -67,9 +67,9 @@ function ProfileEditForm({ user }: ProfileEditFormProps) {
 
         return toast.error(error.message);
       }
-    }
 
-    toast.error("Ha ocurrido un error inesperado");
+      toast.error("Ha ocurrido un error inesperado");
+    }
   };
 
   return (
